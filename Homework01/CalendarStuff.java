@@ -282,7 +282,7 @@ public class CalendarStuff {
           return dayCount;  //to break out in special case
         }
       
-      00
+      
       if(whichIsHigher == -1){     //date1 is lower
           for(int i = (int)year1; i < year2; i ++)
           {
