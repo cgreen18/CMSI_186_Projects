@@ -227,19 +227,19 @@ public class CalendarStuff {
    * @return         String containing the string value of the month (no spaces)
    */
    public static String toMonthString( int month ) {
-      switch( month - 1 ) {
-         case JANUARY: return "JANUARY";
-         case FEBRUARY: return "FEBRUARY";
-         case MARCH: return "MARCH";
-         case APRIL: return "APRIL";
-         case MAY: return "MAY";
-         case JUNE: return "JUNE";
-         case JULY: return "JULY";
-         case AUGUST: return "AUGUST";
-         case SEPTEMBER: return "SEPTEMBER";
-         case OCTOBER: return "OCTOBER";
-         case NOVEMBER: return "NOVEMBER";
-         case DECEMBER: return "DECEMBER";
+      switch( month  ) {
+         case JANUARY: return "January";
+         case FEBRUARY: return "February";
+         case MARCH: return "March";
+         case APRIL: return "April";
+         case MAY: return "May";
+         case JUNE: return "June";
+         case JULY: return "July";
+         case AUGUST: return "August";
+         case SEPTEMBER: return "September";
+         case OCTOBER: return "October";
+         case NOVEMBER: return "November";
+         case DECEMBER: return "December";
          default: throw new IllegalArgumentException( "Illegal month value given to 'toMonthString()'." );
       }
    }
@@ -250,14 +250,14 @@ public class CalendarStuff {
    * @return       String containing the string value of the day (no spaces)
    */
    public static String toDayOfWeekString( int day ) {
-      switch( day - 1 ) {
-         case MONDAY: return "MONDAY";
-         case TUESDAY: return "TUESDAY";
-         case WEDNESDAY: return "WEDNESDAY";
-         case THURSDAY: return "THURSDAY";
-         case FRIDAY: return "FRIDAY";
-         case SATURDAY: return "SATURDAY";
-         case SUNDAY: return "SUNDAY";
+      switch( day ) {
+         case MONDAY: return "Monday";
+         case TUESDAY: return "Tuesday";
+         case WEDNESDAY: return "Wednesday";
+         case THURSDAY: return "Thursday";
+         case FRIDAY: return "Friday";
+         case SATURDAY: return "Saturday";
+         case SUNDAY: return "Sunday";
          default: throw new IllegalArgumentException( "Illegal day value given to 'toDayOfWeekString()'." );
       }
    }
@@ -274,79 +274,107 @@ public class CalendarStuff {
    */
    public static long daysBetween( long month1, long day1, long year1, long month2, long day2, long year2 ) {
       long dayCount = 0;
-      int yrDiff = 0;
-      int numLeaps = 0;
+     
       int whichIsHigher = compareDate(month1,day1,year1,month2,day2,year2);
       
-      if(whichIsHigher == 0){
+      if(dateEquals(month1,day1,year1,month2,day2,year2)){
           dayCount = 0;
           return dayCount;  //to break out in special case
         }
       
-      yrDiff = (int)(whichIsHigher*(year1 - year2));
+      00
+      if(whichIsHigher == -1){     //date1 is lower
+          for(int i = (int)year1; i < year2; i ++)
+          {
+              if(isLeapYear(i)){
+                  dayCount +=366;
+                }
+                else{
+                    dayCount += 365;
+                }
+            }
+        }    
+        else{
+            for(int i = (int)year2; i < year1; i++){
+                if(isLeapYear(i)){
+                    dayCount += 366;
+                }
+                else{
+                    dayCount +=365;
+                }
+            }
+        }
       
-      numLeaps += yrDiff/4;
-      numLeaps -= yrDiff/100;
-      numLeaps += yrDiff/400;
 
-      dayCount = 365*yrDiff;  //turn into long
-      dayCount += numLeaps;
-      
-      if(whichIsHigher == -1){
+   
+      if(whichIsHigher == -1){   //if date1 is less than year2
           if(isLeapYear(year2)){
              for (int i = 1; i < month2 ;i++){
                  dayCount += daysLeap[i];
             }
-             for (int i = 1; i < month1 ;i++){
-                 dayCount -= daysLeap[i];
-            }
-            dayCount += day2 -1;
-            dayCount -= day1 -1;
+             
            }
          else{
              for (int i = 1; i < month2 ;i++){
                  dayCount += days[i];
             }
-            for (int i = 1; i < month1 ;i++){
-                 dayCount -= days[i];
+            
             }
-            dayCount += day2 -1 ;
-            dayCount -= day1 -1;
+         
+            
+            if (isLeapYear(year1)){
+                for (int i = 1; i < month1 ;i++){
+                     dayCount -= daysLeap[i];
+                }
+                dayCount += day2 -1;
+                dayCount -= day1 -1;
             }
-         if(isLeapYear(year1) && (month1>2)){
-             dayCount-=1;
+            else{
+            
+                for (int i = 1; i < month1 ;i++){
+                     dayCount -= days[i];
+                }
+                dayCount += day2 -1 ;
+                dayCount -= day1 -1;
             }
             
-         dayCount -= day1;
+            
+         
         }
         else{
             if(isLeapYear(year1)){
              for (int i = 1; i < month1 ;i++){
                  dayCount += daysLeap[i];
             }
-            for (int i = 1; i < month2 ;i++){
-                 dayCount -= daysLeap[i];
-            }
-            dayCount += day1 -1 ;
-            dayCount -= day2 -1;
+            
            }
          else{
              for (int i = 1; i < month1 ;i++){
                  dayCount += days[i];
             }
-            for (int i = 1; i < month2 ;i++){
-                 dayCount -= days[i];
+            
             }
-            dayCount += day1 -1 ;
-            dayCount -= day2 -1;
+         
+             if (isLeapYear(year2)){
+                for (int i = 1; i < month2 ;i++){
+                     dayCount -= daysLeap[i];
+                }
+                dayCount += day1 -1;
+                dayCount -= day2 -1;
             }
-         if(isLeapYear(year2) && (month2>2)){
-             dayCount-=1;
+            else{
+            
+                for (int i = 1; i < month2 ;i++){
+                     dayCount -= days[i];
+                }
+                dayCount += day1 -1 ;
+                dayCount -= day2 -1;
             }
-         dayCount -=day2;
+            
+         
         }
-      dayCount ++;
+
       return dayCount;
-   }
+    }
 
 }
