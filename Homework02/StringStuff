@@ -24,11 +24,6 @@ import java.util.LinkedHashSet;
 
 public class StringStuff {
 
-    
-    
-    
-    
-    
   public void StringStuff(){
       
     }
@@ -62,7 +57,19 @@ public class StringStuff {
    * @return  boolean which is true if this a palindrome, or false otherwise
    */
    public static boolean isPalindrome( String s ) {
-      return true;
+       String palinStr = new String(s.toLowerCase());
+       int i = 0;
+       int j = palinStr.length()-1;
+      
+       while (i < j){       
+           if (palinStr.charAt(i) != palinStr.charAt(j)){
+               return false;
+           }
+           i++;
+           j--;
+       }
+          
+       return true;
    }
 
   /**
@@ -74,7 +81,16 @@ public class StringStuff {
    * @return  String containing the &quot;even&quot; letters from the input
    */
    public static String evensOnly( String s ) {
-      return new String( "HJHJHJ" );
+      String evenString = "bdfhjlnprtvxz";
+      String str = s.toLowerCase();
+      StringBuilder strToReturn = new StringBuilder();
+      
+      for (int i = 0; i<str.length();i++){
+          if (evenString.indexOf(str.charAt(i)) != -1 ){
+              strToReturn.append(s.charAt(i));
+            }
+        }
+       return strToReturn.toString();
    }
 
   /**
@@ -86,7 +102,16 @@ public class StringStuff {
    * @return  String containing the &quot;odd&quot; letters from the input
    */
    public static String oddsOnly( String s ) {
-      return new String( "IKIKIK" );
+      String oddString = "acegikmoqsuwy";
+      String str = s.toLowerCase();
+      StringBuilder strToReturn = new StringBuilder();
+      
+      for (int i = 0; i<str.length();i++){
+          if (oddString.indexOf(str.charAt(i)) != -1 ){
+              strToReturn.append(s.charAt(i));
+            }
+        }
+       return strToReturn.toString();
    }
 
   /**
@@ -97,10 +122,23 @@ public class StringStuff {
    * @return  String containing the &quot;even&quot; letters from the input without duplicates
    */
    public static String evensOnlyNoDupes( String s ) {
-      return new String( "HJ" );
+      String evenString = "bdfhjlnprtvxz";
+
+      String str = s.toLowerCase();
+      StringBuilder strToReturn = new StringBuilder();
+      
+      for (int i = 0; i<str.length();i++){
+          if (evenString.indexOf(str.charAt(i)) != -1 ){
+              if(strToReturn.toString().toLowerCase().indexOf(str.charAt(i)) ==-1){
+              
+              strToReturn.append(s.charAt(i));
+            }
+            }
+        }
+       return strToReturn.toString();
    }
 
-  /**
+    /**
    * Method to return the characters in a string that correspond to the &quot;ODD&quot; index
    * numbers of the alphabet, but with no duplicate characters in the resulting string.
    *
@@ -108,45 +146,45 @@ public class StringStuff {
    * @return  String containing the &quot;odd&quot; letters from the input without duplicates
    */
    public static String oddsOnlyNoDupes( String s ) {
-      return new String( "IK" );
+      String evenString = "acegikmoqsuwy";
+
+      //other than the first array everything from last method is usable
+      
+      String str = s.toLowerCase();
+      StringBuilder strToReturn = new StringBuilder();
+      
+      for (int i = 0; i<str.length();i++){
+          if (evenString.indexOf(str.charAt(i)) != -1 ){
+              if(strToReturn.toString().toLowerCase().indexOf(str.charAt(i)) ==-1){
+              
+              strToReturn.append(s.charAt(i));
+            }
+            }
+        }
+       return strToReturn.toString();
    }
 
-  /**
+   /**
    * Method to return the reverse of a string passed as an argument
    *
    * @param s String containing the data to be reversed
    * @return  String containing the reverse of the input string
    */
+  
    public static String reverse( String s ) {
-      return new String( "kculc eht tahw" );
+       String str = s;
+       StringBuilder strToReturn = new StringBuilder();
+       
+       for (int i = str.length()-1; i >= 0; i--){
+            strToReturn.append(str.charAt(i));
+        }
+       
+       
+       
+       return strToReturn.toString();
+      
+      
    }
 
-  // /**
-   // * Main method to test the methods in this class
-   // *
-   // * @param args String array containing command line parameters
-   // */
-   // public static void main( String args[] ) {
-      // String blah = new String( "Blah blah blah" );
-      // String woof = new String( "BCDBCDBCDBCDBCD" );
-      // String pal1 = new String( "a" );
-      // String pal2 = new String( "ab" );
-      // String pal3 = new String( "aba" );
-      // String pal4 = new String( "amanaplanacanalpanama" );
-      // String pal5 = new String( "abba" );
-      // System.out.println( containsVowel( blah ) );
-      // System.out.println( containsVowel( woof ) );
-      // System.out.println( isPalindrome( pal1 ) );
-      // System.out.println( isPalindrome( pal2 ) );
-      // System.out.println( isPalindrome( pal3 ) );
-      // System.out.println( isPalindrome( pal4 ) );
-      // System.out.println( isPalindrome( pal5 ) );
-      // System.out.println( "evensOnly()        returns: " + evensOnly( "REHEARSALSZ" ) );
-      // System.out.println( "evensOnly()        returns: " + evensOnly( "REhearSALsz" ) );
-      // System.out.println( "evensOnlyNoDupes() returns: " + evensOnlyNoDupes( "REhearSALsz" ) );
-      // System.out.println( "oddsOnly()         returns: " + oddsOnly( "xylophones" ) );
-      // System.out.println( "oddsOnly()         returns: " + oddsOnly( "XYloPHonES" ) );
-      // System.out.println( "oddsOnlyNoDupes()  returns: " + oddsOnlyNoDupes( "XYloPHonES" ) );
-      // System.out.println( "reverse()          returns: " + reverse( "REHEARSALSZ" ) );
-   // }
+  
 }
