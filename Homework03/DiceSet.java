@@ -135,7 +135,7 @@ public class DiceSet {
 
       for (int i = 0; i < ds.length; i++){
         for (int j = 0; j < ds.length; i++){
-          if(ds.getIndividual(i) == ds2.getIndividual(j) && indexDiceUsed[j] == 0 ){
+          if(ds.getIndividual(i) == ds2.getIndividual(j) && (indexDiceUsed[j] != 1) ){
             indexDiceUsed[j] == 1;
           }
         }
