@@ -28,19 +28,38 @@ public class MainProgLoop{
       // text into the program
       BufferedReader input = new BufferedReader( new InputStreamReader( System.in ) );
 
-      if (args[].length == 2){
+
+      if (args.length == 2){
         int countArg = Integer.parseInt(args[0]);
         int sidesArg = Integer.parseInt(args[1]);
         DiceSet mySet = new DiceSet(countArg,sidesArg);
+
       }
       else {
-        System.out.println("Please enter the number of dice and sides desired. \n" +
-        "sides must be greater than 4.  Enter the data as two integers seperated by a space"+
-        "\n>>");
-        String inputLine = input.readLine();
-        int countIn = Integer.parseInt(inputLine.substring(0,inputLine.indexOf(" ")-1));
-        int sidesIn = Integer.parseInt(inputLine.substring(inputLine.indexOf(" ")-1,inputLine.length-1));
-        DiceSet mySet = new DiceSet(countIn,sidesIn);
+        boolean breakVar = true;
+        while(breakVar){
+          System.out.println("Please enter the number of dice and sides desired. \n" +
+          "sides must be greater than 4.  Enter the data as two integers seperated by a space"+
+          "\n>>");
+          try{
+            String inputLine = input.readLine();
+            if (inputLine.indexOf(" ") != -1){
+              int countIn = Integer.parseInt(inputLine.substring(0,inputLine.indexOf(" ")-1));
+              int sidesIn = Integer.parseInt(inputLine.substring(inputLine.indexOf(" ")-1,inputLine.length()-1));
+              DiceSet mySet = new DiceSet(countIn,sidesIn);
+              breakVar = false;
+            }
+            else if (inputLine.indexOf(" ") == -1 && inputLine.length() > 0){
+              System.out.println("Please put a space between the numbers");
+            }
+            else{
+              System.out.println("Please enter a valid format");
+            }
+          }
+          catch( IOException ioe ) {
+             System.out.println( "Caught IOException" );
+          }
+        }
       }
 
 
@@ -56,7 +75,7 @@ public class MainProgLoop{
                inputLine = "___";   //to stop an error when reading charAt(0)
                System.out.println("enter some text!");
             }
-            else if( 'Q' == inputLine.toUpper().charAt(0) ) {
+            else if( 'Q' == inputLine.toUpperCase().charAt(0) ) {
                break;
             }
             else{
@@ -64,22 +83,22 @@ public class MainProgLoop{
                         "SAVE THIS SCORE AS THE HIGH SCORE \nDISPLAY THE HIGH SCORE \nENTER 'Q' or 'q' TO QUIT THE PROGRAM\n");
             }
 
-           if (inputLine.toUpper().equals("ROLL ALL THE DICE")){
+           if (inputLine.toUpperCase().equals("ROLL ALL THE DICE")){
 
            }
-           else if (inputLine.toUpper().equals("ROLL A SINGLE DIE")){
+           else if (inputLine.toUpperCase().equals("ROLL A SINGLE DIE")){
 
            }
-           else if (inputLine.toUpper().equals("CALCULATE THE SCORE FOR THIS SET")){
+           else if (inputLine.toUpperCase().equals("CALCULATE THE SCORE FOR THIS SET")){
 
            }
-           else if (inputLine.toUpper().equals("SAVE THIS SCORE AS THE HIGH SCORE")){
+           else if (inputLine.toUpperCase().equals("SAVE THIS SCORE AS THE HIGH SCORE")){
 
            }
-           else if (inputLine.toUpper().equals("DISPLAY THE HIGH SCORE")){
+           else if (inputLine.toUpperCase().equals("DISPLAY THE HIGH SCORE")){
 
            }
-           else if('Q' == inputLine.toUpper().charAt(0)){
+           else if('Q' == inputLine.toUpperCase().charAt(0)){
              break;
            }
 
