@@ -67,6 +67,14 @@ public class DiceSet {
 
    }
 
+   public int returnLength(){
+     return ds.length;
+   }
+
+   public int returnSides(){
+     return sides;
+   }
+
   /**
    * Randomly rolls all of the dice in this set
    *  NOTE: you will need to use one of the "toString()" methods to obtain
@@ -120,27 +128,24 @@ public class DiceSet {
    * @return  true iff this set is identical to the set passed as an argument
    */
    public boolean isIdentical( DiceSet ds2 ) {
-      int[] indexDiceUsed =  new int[ds2.length];
+      int[] indexDiceUsed =  new int[ds2.returnLength()];
 
-      if (ds.length != ds2.length)
+      if (ds.length != ds2.returnLength())
       {
         return false;
       }
-      else if(ds.count != ds2.count){
-        return false;
-      }
-      else if(ds.sides != ds.sides){
+      else if(ds[1].getSides() != ds2.returnSides()){
         return false;
       }
 
       for (int i = 0; i < ds.length; i++){
         for (int j = 0; j < ds.length; i++){
-          if(ds.getIndividual(i) == ds2.getIndividual(j) && (indexDiceUsed[j] != 1) ){
-            indexDiceUsed[j] == 1;
+          if(ds[i].getValue() == ds2.getIndividual(j) && (indexDiceUsed[j] != 1) ){
+            indexDiceUsed[j] = 1;
           }
         }
       }
-      for (int k = 0;k < indexDiceused;k++){
+      for (int k = 0;k < ds.length;k++){
         if( indexDiceUsed[k] == 0){
           return false;
         }
@@ -150,7 +155,7 @@ public class DiceSet {
    }
   /**
    * A little test main to check things out
-   */
+   *
    public static void main( String[] args ) {
       int countIn = Integer.parseInt(args[0]);
       int sidesIn = Integer.parseInt(args[1]);
@@ -169,5 +174,7 @@ public class DiceSet {
       System.out.println(myDS.isIdentical(secondDS));
       System.out.println(myDS.isIdentical(thirdDS));
    }
+   */
+
 
 }
