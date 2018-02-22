@@ -20,7 +20,10 @@ import java.io.IOException;
 
 public class MainProgLoop{
 
+
+
    public static void main( String args[] ) {
+
 
       int highScore = 0;
       DiceSet mySet = null;
@@ -48,8 +51,8 @@ public class MainProgLoop{
           try{
             String inputLine = input.readLine();
             if (inputLine.indexOf("-") != -1){
-              int countIn = Integer.parseInt(inputLine.substring(0,inputLine.indexOf("-")-1));
-              int sidesIn = Integer.parseInt(inputLine.substring(inputLine.indexOf("-")-1,inputLine.length()-1));
+              int countIn = Integer.parseInt(inputLine.substring(0,inputLine.indexOf("-")));
+              int sidesIn = Integer.parseInt(inputLine.substring(inputLine.indexOf("-")+1,inputLine.length()));
               mySet = new DiceSet(countIn,sidesIn);
               breakVar = false;
             }
@@ -80,12 +83,13 @@ public class MainProgLoop{
             System.out.print("Your options are: \nROLL ALL THE DICE \nROLL A SINGLE DIE \nCALCULATE THE SCORE FOR THIS SET \n" +
                         "SAVE THIS SCORE AS THE HIGH SCORE \nDISPLAY THE HIGH SCORE \nENTER 'Q' or 'q' TO QUIT THE PROGRAM\n");
 
+           String inputLine3 = input.readLine();
 
-           if (inputLine.toUpperCase().equals("ROLL ALL THE DICE")){
+           if (inputLine3.toUpperCase().equals("ROLL ALL THE DICE")){
              mySet.roll();
              System.out.println("Rolled");
            }
-           else if (inputLine.toUpperCase().equals("ROLL A SINGLE DIE")){
+           else if (inputLine3.toUpperCase().equals("ROLL A SINGLE DIE")){
              System.out.println("What die do you want to roll?");
              try{
                String inputLine2 = input.readLine();
@@ -96,18 +100,18 @@ public class MainProgLoop{
                 System.out.println( "Caught IOException" );
              }
            }
-           else if (inputLine.toUpperCase().equals("CALCULATE THE SCORE FOR THIS SET")){
+           else if (inputLine3.toUpperCase().equals("CALCULATE THE SCORE FOR THIS SET")){
              Integer setSum = new Integer(mySet.sum());
              System.out.println("The score is "+ setSum.toString());
            }
-           else if (inputLine.toUpperCase().equals("SAVE THIS SCORE AS THE HIGH SCORE")){
-             highscore = mySet.sum();
+           else if (inputLine3.toUpperCase().equals("SAVE THIS SCORE AS THE HIGH SCORE")){
+             highScore = mySet.sum();
            }
-           else if (inputLine.toUpperCase().equals("DISPLAY THE HIGH SCORE")){
-             Integer tempHighScore = new Integer(highscore);
+           else if (inputLine3.toUpperCase().equals("DISPLAY THE HIGH SCORE")){
+             Integer tempHighScore = new Integer(highScore);
              System.out.println("The high score is " + tempHighScore.toString());
            }
-           else if('Q' == inputLine.toUpperCase().charAt(0)){
+           else if('Q' == inputLine3.toUpperCase().charAt(0)){
              break;
            }
 
