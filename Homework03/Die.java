@@ -75,6 +75,10 @@ public class Die {
       return dieVal;
    }
 
+   public int getSides(){
+     return sides;
+   }
+
   /**
    * @param  int  the number of sides to set/reset for this Die instance
    * @return      The new number of sides, in case anyone is looking
