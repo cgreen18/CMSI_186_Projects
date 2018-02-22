@@ -1,0 +1,92 @@
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  File name     :  MainProgLoop.java
+ *  Purpose       :  Demonstrates the use of input from a command line for use with Yahtzee
+ *  Author        :  B.J. Johnson
+ *  Date          :  2017-02-14
+ *  Description   :
+ *  Notes         :  None
+ *  Warnings      :  None
+ *  Exceptions    :  None
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *  Revision Histor
+ *  ---------------
+ *            Rev      Date     Modified by:  Reason for change/modification
+ *           -----  ----------  ------------  -----------------------------------------------------------
+ *  @version 1.0.0  2017-02-14  B.J. Johnson  Initial writing and release
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+public class MainProgLoop{
+
+   public static void main( String args[] ) {
+      System.out.println( "\n   Welcome to HighRoll!!\n" );
+      System.out.println( "     Press the 'q' key to quit the program." );
+
+      // This line uses the two classes to assemble an "input stream" for the user to type
+      // text into the program
+      BufferedReader input = new BufferedReader( new InputStreamReader( System.in ) );
+
+      if (args[].length == 2){
+        int countArg = Integer.parseInt(args[0]);
+        int sidesArg = Integer.parseInt(args[1]);
+        DiceSet mySet = new DiceSet(countArg,sidesArg);
+      }
+      else {
+        System.out.println("Please enter the number of dice and sides desired. \n" +
+        "sides must be greater than 4.  Enter the data as two integers seperated by a space"+
+        "\n>>");
+        String inputLine = input.readLine();
+        int countIn = Integer.parseInt(inputLine.substring(0,inputLine.indexOf(" ")-1));
+        int sidesIn = Integer.parseInt(inputLine.substring(inputLine.indexOf(" ")-1,inputLine.length-1));
+        DiceSet mySet = new DiceSet(countIn,sidesIn);
+      }
+
+
+
+
+
+      while( true ) {
+         System.out.print( ">>" );
+         String inputLine = null;
+         try {
+            inputLine = input.readLine();
+            if( 0 == inputLine.length() ) {
+               inputLine = "___";   //to stop an error when reading charAt(0)
+               System.out.println("enter some text!");
+            }
+            else if( 'Q' == inputLine.toUpper().charAt(0) ) {
+               break;
+            }
+            else{
+            System.out.print("Your options are: \nROLL ALL THE DICE \nROLL A SINGLE DIE \nCALCULATE THE SCORE FOR THIS SET \n" +
+                        "SAVE THIS SCORE AS THE HIGH SCORE \nDISPLAY THE HIGH SCORE \nENTER 'Q' or 'q' TO QUIT THE PROGRAM\n");
+            }
+
+           if (inputLine.toUpper().equals("ROLL ALL THE DICE")){
+
+           }
+           else if (inputLine.toUpper().equals("ROLL A SINGLE DIE")){
+
+           }
+           else if (inputLine.toUpper().equals("CALCULATE THE SCORE FOR THIS SET")){
+
+           }
+           else if (inputLine.toUpper().equals("SAVE THIS SCORE AS THE HIGH SCORE")){
+
+           }
+           else if (inputLine.toUpper().equals("DISPLAY THE HIGH SCORE")){
+
+           }
+           else if('Q' == inputLine.toUpper().charAt(0)){
+             break;
+           }
+
+         }
+         catch( IOException ioe ) {
+            System.out.println( "Caught IOException" );
+         }
+      }
+   }
+}
