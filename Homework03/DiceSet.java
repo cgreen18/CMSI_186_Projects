@@ -71,7 +71,6 @@ public class DiceSet {
    *  the values of the dice in the set
    */
    public void roll() {
-     int sumToReturn = 0;
      for (int i = 0; i < count; i++){
         sumToReturn += ds[i].roll();
      }
@@ -124,7 +123,7 @@ public class DiceSet {
    }
   /**
    * A little test main to check things out
-   */
+   *
    public static void main( String[] args ) {
       int countIn = Integer.parseInt(args[0]);
       int sidesIn = Integer.parseInt(args[1]);
@@ -140,5 +139,6 @@ public class DiceSet {
       System.out.println(myDS.isIdentical(secondDS));
       System.out.println(myDS.isIdentical(thirdDS));
    }
+   */
 
 }
