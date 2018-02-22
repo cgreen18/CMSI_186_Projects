@@ -45,6 +45,8 @@ public class DiceSet {
    * @note   parameters are checked for validity; invalid values throw "IllegalArgumentException"
    */
    public DiceSet( int countArg, int sidesArg ) {
+      count = countArg;
+      sides = sidesArg;
       ds = new Die[ countArg ];
       for(int i = 0;i<countArg;i++){
         ds[i] = new Die(sidesArg);
@@ -71,6 +73,7 @@ public class DiceSet {
    *  the values of the dice in the set
    */
    public void roll() {
+     int sumToReturn = 0;
      for (int i = 0; i < count; i++){
         sumToReturn += ds[i].roll();
      }
@@ -117,28 +120,54 @@ public class DiceSet {
    * @return  true iff this set is identical to the set passed as an argument
    */
    public boolean isIdentical( DiceSet ds2 ) {
+      int[] indexDiceUsed =  new int[ds2.length];
 
-      boolean booToReturn = (ds.toString().equals(ds2.toString())) ? true : false;
-      return booToReturn;
+      if (ds.length != ds2.length)
+      {
+        return false;
+      }
+      else if(ds.count != ds2.count){
+        return false;
+      }
+      else if(ds.sides != ds.sides){
+        return false;
+      }
+
+      for (int i = 0; i < ds.length; i++){
+        for (int j = 0; j < ds.length; i++){
+          if(ds.getIndividual(i) == ds2.getIndividual(j) && indexDiceUsed[j] == 0 ){
+            indexDiceUsed[j] == 1;
+          }
+        }
+      }
+      for (int k = 0;k < indexDiceused;k++){
+        if( indexDiceUsed[k] == 0){
+          return false;
+        }
+      }
+
+      return true;
    }
   /**
    * A little test main to check things out
-   *
+   */
    public static void main( String[] args ) {
       int countIn = Integer.parseInt(args[0]);
       int sidesIn = Integer.parseInt(args[1]);
       DiceSet myDS = new DiceSet(countIn,sidesIn);
       myDS.roll();
       System.out.println(myDS.toString());
+      System.out.println();
       System.out.println(myDS.getIndividual(2));
       myDS.rollIndividual(2);
       System.out.println(myDS.getIndividual(2));
       System.out.println(myDS.toString());
       DiceSet secondDS = myDS; //same reference location
-      DiceSet thirdDS = new DiceSet(countIn,sidesIn);
+      System.out.println(secondDS.toString());
+      DiceSet thirdDS = new DiceSet(countIn,sidesIn);   //same initials
+      System.out.println(thirdDS.toString());
       System.out.println(myDS.isIdentical(secondDS));
       System.out.println(myDS.isIdentical(thirdDS));
    }
-   */
 
 }
