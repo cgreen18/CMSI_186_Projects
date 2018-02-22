@@ -52,7 +52,7 @@ public class Die {
    */
    public Die( int nSides ) {
      sides = nSides;
-     dieVal = null;
+     dieVal = 0;
    }
 
   /**
@@ -60,7 +60,7 @@ public class Die {
    * @return  integer value of the result of the roll, randomly selected
    */
    public int roll() {
-      dieVal = (int)(Math.random()*nSides + 1);
+      dieVal = (int)(Math.random()*sides + 1);
       return dieVal;
    }
 
@@ -80,8 +80,8 @@ public class Die {
    * @return      The new number of sides, in case anyone is looking
    * @throws      IllegalArgumentException
    */
-   public void setSides( int sides ) {
-       sides = sides;
+   public void setSides( int sidesArg ) {
+       sides = sidesArg;
    }
 
   /**
@@ -89,11 +89,12 @@ public class Die {
    * @return String representation of this Die
    */
    public String toString() {
-      StringBuilder strToReturn = new StringBuilder;
+      StringBuilder strToReturn = new StringBuilder();
       strToReturn.append("The die is ");
       strToReturn.append(sides);
       strToReturn.append(" sides currently showing a value of: ");
       strToReturn.append(dieVal);
+      strToReturn.append("\n");
       return strToReturn.toString();
    }
 
@@ -108,8 +109,26 @@ public class Die {
   /**
    * A little test main to check things out
    */
-   public static void main( String[] args ) {
+  public static void main( String[] args ) {
       System.out.println( "Hello world from the Die class..." );
+      Die myDie = new Die(6);
+      for (int i = 1; i < 10; i++){
+        myDie.roll();
+        System.out.println(myDie.getValue() + "\n");
+        System.out.println(myDie.toString());
+
+      }
+      myDie.setSides(12);
+      Integer testSides = new Integer(myDie.sides);
+      System.out.println(testSides.toString());
+      for (int j = 1; j <10 ; j++){
+        myDie.roll();
+        System.out.println(myDie.getValue() + "\n");
+        System.out.println(myDie.toString());
+
+      }
    }
+
+
 
 }
