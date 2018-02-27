@@ -1,0 +1,55 @@
+
+Evaluation for homework 03: Dice Game
+
+Die, DiceSet, and HighRoll Program
+Includes running DieAndDiceSetTestHarness
+Includes running automated HighRoll tests
+=========================================
+
+A total of one point each for the following:
+
+class Die         : Exists, coding style acceptable   - 1 point
+constructor       : works                             - 1 point
+roll              : works                             - 1 point
+getValue          : works                             - 1 point
+setSides          : works                             - 1 point
+instan. toString  : works                             - 1 point
+class toString    : works                             - 1 point
+main for testing  : Exists, with some tests in it     - 0 point
+
+class DiceSet     : Exists, coding style acceptable   - 1 point
+constructor       : works                             - 1 point
+sum               : works                             - 1 point
+roll              : works                             - 1 point
+rollIndividual    : works                             - 1 point
+getIndividual     : works                             - 1 point
+instan. toString  : works                             - 1 point
+class toString    : works                             - 1 point
+isIdentical       : works                             - 1 point
+main for testing  : Exists, with some tests in it     - 0 point
+
+class HighRoll    : Exists, coding style acceptable   - 0 point
+TUI:              : works, all options present        - 0 point
+option 1 roll all : works                             - 0 point
+option 2 roll one : works                             - 0 point
+option 3 sum      : works                             - 0 point
+option 4 save     : works                             - 0 point
+option 5 display  : works                             - 0 point
+option 6 quit     : works                             - 0 point
+
+Files in Git      : all three present                 - 0.67 point
+Test Harness      : ArrayIndexOutOfBoundsException at
+                       DiceSet.java line 143          - 0.75 point
+HighRoll          : passes all evaluation tests       - 0 points
+
+Total 18.42 out of 30 = 61.4% which is an D
+
+Sorry to have to give such a low score -- I know you can do better than
+this, Conor...  the low evaluation is because there were no tests in
+your Die.java or DiceSet.java file, and the fact that you had no HighRoll
+file hurt a LOT.
+
+If you are having trouble for any reason with this stuff, please don't
+hesitate to drop by my office during office hours or during the HOPE
+session on Wednesdays at noon in the regular class room [Keck Annex].
+
