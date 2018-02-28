@@ -113,6 +113,7 @@ public class Die {
   /**
    * A little test main to check things out
    *
+   */
   public static void main( String[] args ) {
       System.out.println( "Hello world from the Die class..." );
       Die myDie = new Die(6);
@@ -132,7 +133,7 @@ public class Die {
 
       }
    }
-*/
+
 
 
 }

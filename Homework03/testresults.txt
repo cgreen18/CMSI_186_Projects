@@ -1,0 +1,970 @@
+TESTING MAIN IN DIE.JAVA-----------------
+
+Hello world from the Die class...
+4
+
+The die is 6 sides currently showing a value of: 4
+
+4
+
+The die is 6 sides currently showing a value of: 4
+
+6
+
+The die is 6 sides currently showing a value of: 6
+
+1
+
+The die is 6 sides currently showing a value of: 1
+
+4
+
+The die is 6 sides currently showing a value of: 4
+
+6
+
+The die is 6 sides currently showing a value of: 6
+
+5
+
+The die is 6 sides currently showing a value of: 5
+
+5
+
+The die is 6 sides currently showing a value of: 5
+
+3
+
+The die is 6 sides currently showing a value of: 3
+
+12
+8
+
+The die is 12 sides currently showing a value of: 8
+
+7
+
+The die is 12 sides currently showing a value of: 7
+
+3
+
+The die is 12 sides currently showing a value of: 3
+
+1
+
+The die is 12 sides currently showing a value of: 1
+
+11
+
+The die is 12 sides currently showing a value of: 11
+
+8
+
+The die is 12 sides currently showing a value of: 8
+
+8
+
+The die is 12 sides currently showing a value of: 8
+
+1
+
+The die is 12 sides currently showing a value of: 1
+
+7
+
+The die is 12 sides currently showing a value of: 7
+
+TESTING MAIN IN DICESET.JAVA ---------------------------
+The die is 6 sides currently showing a value of: 2
+The die is 6 sides currently showing a value of: 3
+The die is 6 sides currently showing a value of: 3
+The die is 6 sides currently showing a value of: 3
+The die is 6 sides currently showing a value of: 4
+
+
+3
+4
+The die is 6 sides currently showing a value of: 2
+The die is 6 sides currently showing a value of: 3
+The die is 6 sides currently showing a value of: 4
+The die is 6 sides currently showing a value of: 3
+The die is 6 sides currently showing a value of: 4
+
+The die is 6 sides currently showing a value of: 2
+The die is 6 sides currently showing a value of: 3
+The die is 6 sides currently showing a value of: 4
+The die is 6 sides currently showing a value of: 3
+The die is 6 sides currently showing a value of: 4
+
+The die is 6 sides currently showing a value of: 0
+The die is 6 sides currently showing a value of: 0
+The die is 6 sides currently showing a value of: 0
+The die is 6 sides currently showing a value of: 0
+The die is 6 sides currently showing a value of: 0
+
+NOTE: THIS TEST PROGRAM THROWS AN EXCEPTION AND DOES NOT COMPLETE.
+THE EXCEPTION MESSAGE IS AS FOLLOWS:
+   Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 5
+        at DiceSet.isIdentical(DiceSet.java:143)
+        at DiceSet.main(DiceSet.java:174)
+
+TESTING THE DIE CLASS: TEST CONSTRUCTOR FOR INVALID NUMBERS OF SIDES:
+TESTING THE DIE CLASS: TESTS ON 4-SIDED DIE:
+   roll() test for 4 sided die:
+   You rolled a 4
+   You rolled a 4
+   You rolled a 4
+   You rolled a 1
+   You rolled a 2
+   Current value is: The die is 4 sides currently showing a value of: 2
+
+TESTING THE DIE CLASS: TESTS ON 5-SIDED DIE:
+   roll() test for 5 sided die:
+   You rolled a 4
+   You rolled a 3
+   You rolled a 4
+   You rolled a 4
+   You rolled a 4
+   Current value is: The die is 5 sides currently showing a value of: 4
+
+TESTING THE DIE CLASS: TESTS ON 6-SIDED DIE:
+   roll() test for 6 sided die:
+   You rolled a 5
+   You rolled a 5
+   You rolled a 6
+   You rolled a 3
+   You rolled a 2
+   Current value is: The die is 6 sides currently showing a value of: 2
+
+TESTING THE DIE CLASS: TESTS ON 7-SIDED DIE:
+   roll() test for 7 sided die:
+   You rolled a 4
+   You rolled a 2
+   You rolled a 6
+   You rolled a 6
+   You rolled a 4
+   Current value is: The die is 7 sides currently showing a value of: 4
+
+TESTING THE DIE CLASS: TESTS ON 8-SIDED DIE:
+   roll() test for 8 sided die:
+   You rolled a 5
+   You rolled a 1
+   You rolled a 2
+   You rolled a 4
+   You rolled a 7
+   Current value is: The die is 8 sides currently showing a value of: 7
+
+   Current die side count is: 8
+TESTING THE DIE CLASS: TESTS ON 11-SIDED DIE USING NEW SIDE COUNT:
+   Resetting - current die side count is now: 11
+   Rolling with new side count --
+      You rolled a 10
+      You rolled a 5
+      You rolled a 6
+      You rolled a 6
+      You rolled a 6
+TESTING THE DIE CLASS: TESTS ON 17-SIDED DIE USING NEW SIDE COUNT:
+   Resetting - current die side count is now: 17
+   Rolling with new side count --
+      You rolled a 5
+      current value is: 5
+TESTING THE DIE CLASS: TESTS ON 111-SIDED DIE USING NEW SIDE COUNT:
+   Resetting - current die side count is now: 111
+   Rolling with new side count --
+      You rolled a 56
+      current value is: 56
+......End of Die Class Testing.....
+
+
+TESTING THE DICESET CLASS: TEST CONSTRUCTOR FOR 3 SIX-SIDED DICE:
+  DiceSet: 3 dice, six sided - ds36:
+      initialized ds36 contents             : The die is 6 sides currently showing a value of: 0
+The die is 6 sides currently showing a value of: 0
+The die is 6 sides currently showing a value of: 0
+
+      after collective roll ds36 contents   : The die is 6 sides currently showing a value of: 2
+The die is 6 sides currently showing a value of: 1
+The die is 6 sides currently showing a value of: 4
+
+      after individual roll(2) ds36 contents: The die is 6 sides currently showing a value of: 2
+The die is 6 sides currently showing a value of: 1
+The die is 6 sides currently showing a value of: 4
+
+      sum of dice values is: 7
+   Re-rolling all dice
+      after collective roll ds36 contents   : The die is 6 sides currently showing a value of: 3
+The die is 6 sides currently showing a value of: 1
+The die is 6 sides currently showing a value of: 6
+
+      after individual roll(2) ds36 contents: The die is 6 sides currently showing a value of: 3
+The die is 6 sides currently showing a value of: 1
+The die is 6 sides currently showing a value of: 4
+
+      sum of dice values is                 : 8
+   Test of getIndividual():
+      value of die at index 0: 3
+      value of die at index 1: 1
+      value of die at index 2: 4
+TESTING THE DICESET CLASS: TEST CONSTRUCTOR FOR 6 NINE-SIDED DICE:
+   DiceSet: 6 dice, nine sided - ds69:
+      initialized ds36 contents             : The die is 9 sides currently showing a value of: 0
+The die is 9 sides currently showing a value of: 0
+The die is 9 sides currently showing a value of: 0
+The die is 9 sides currently showing a value of: 0
+The die is 9 sides currently showing a value of: 0
+The die is 9 sides currently showing a value of: 0
+
+      after collective roll ds69 contents   : The die is 9 sides currently showing a value of: 5
+The die is 9 sides currently showing a value of: 5
+The die is 9 sides currently showing a value of: 1
+The die is 9 sides currently showing a value of: 5
+The die is 9 sides currently showing a value of: 1
+The die is 9 sides currently showing a value of: 4
+
+      after individual roll(2) ds69 contents: The die is 9 sides currently showing a value of: 5
+The die is 9 sides currently showing a value of: 5
+The die is 9 sides currently showing a value of: 9
+The die is 9 sides currently showing a value of: 5
+The die is 9 sides currently showing a value of: 1
+The die is 9 sides currently showing a value of: 4
+
+      sum of dice values is                 : 29
+   Re-rolling all dice
+      after collective roll ds69 contents   : The die is 9 sides currently showing a value of: 8
+The die is 9 sides currently showing a value of: 3
+The die is 9 sides currently showing a value of: 9
+The die is 9 sides currently showing a value of: 5
+The die is 9 sides currently showing a value of: 1
+The die is 9 sides currently showing a value of: 5
+
+      after individual roll(3) ds69 contents: The die is 9 sides currently showing a value of: 8
+The die is 9 sides currently showing a value of: 3
+The die is 9 sides currently showing a value of: 9
+The die is 9 sides currently showing a value of: 1
+The die is 9 sides currently showing a value of: 1
+The die is 9 sides currently showing a value of: 5
+
+      sum of dice values is                 : 27
+   Test of getIndividual():
+      value of die at index 0: 8
+      value of die at index 1: 3
+      value of die at index 2: 9
+      value of die at index 3: 1
+      value of die at index 4: 1
+      value of die at index 5: 5
+TESTING THE DICESET CLASS: TEST CONSTRUCTOR FOR 9 SEVENTEEN-SIDED DICE:
+   DiceSet: 9 dice, 17 sided - ds917:
+      initialized ds36 contents              : The die is 17 sides currently showing a value of: 0
+The die is 17 sides currently showing a value of: 0
+The die is 17 sides currently showing a value of: 0
+The die is 17 sides currently showing a value of: 0
+The die is 17 sides currently showing a value of: 0
+The die is 17 sides currently showing a value of: 0
+The die is 17 sides currently showing a value of: 0
+The die is 17 sides currently showing a value of: 0
+The die is 17 sides currently showing a value of: 0
+
+      after collective roll ds917 contents   : The die is 17 sides currently showing a value of: 8
+The die is 17 sides currently showing a value of: 2
+The die is 17 sides currently showing a value of: 12
+The die is 17 sides currently showing a value of: 12
+The die is 17 sides currently showing a value of: 10
+The die is 17 sides currently showing a value of: 14
+The die is 17 sides currently showing a value of: 15
+The die is 17 sides currently showing a value of: 7
+The die is 17 sides currently showing a value of: 16
+
+      after individual roll(6) ds917 contents: The die is 17 sides currently showing a value of: 8
+The die is 17 sides currently showing a value of: 2
+The die is 17 sides currently showing a value of: 12
+The die is 17 sides currently showing a value of: 12
+The die is 17 sides currently showing a value of: 10
+The die is 17 sides currently showing a value of: 14
+The die is 17 sides currently showing a value of: 1
+The die is 17 sides currently showing a value of: 7
+The die is 17 sides currently showing a value of: 16
+
+      sum of dice values is                  : 82
+   Re-rolling all dice
+      after collective roll ds917 contents   : The die is 17 sides currently showing a value of: 11
+The die is 17 sides currently showing a value of: 1
+The die is 17 sides currently showing a value of: 5
+The die is 17 sides currently showing a value of: 4
+The die is 17 sides currently showing a value of: 17
+The die is 17 sides currently showing a value of: 6
+The die is 17 sides currently showing a value of: 10
+The die is 17 sides currently showing a value of: 17
+The die is 17 sides currently showing a value of: 16
+
+      after individual roll(8) ds69 contents : The die is 17 sides currently showing a value of: 11
+The die is 17 sides currently showing a value of: 1
+The die is 17 sides currently showing a value of: 5
+The die is 17 sides currently showing a value of: 4
+The die is 17 sides currently showing a value of: 17
+The die is 17 sides currently showing a value of: 6
+The die is 17 sides currently showing a value of: 10
+The die is 17 sides currently showing a value of: 17
+The die is 17 sides currently showing a value of: 3
+
+      sum of dice values is                  : 74
+   Test of getIndividual():
+      value of die at index 0: 11
+      value of die at index 1: 1
+      value of die at index 2: 5
+      value of die at index 3: 4
+      value of die at index 4: 17
+      value of die at index 5: 6
+      value of die at index 6: 10
+      value of die at index 7: 17
+      value of die at index 8: 3
+TESTING THE DICESET CLASS: TEST 'isIdentical()' FOR 9 SEVENTEEN-SIDED DICE:
+   Test of isIndentical():
+      Test of ds917 against ds69   : false
+
+NOTE: THIS TEST PROGRAM THROWS AN EXCEPTION AND DOES NOT COMPLETE.
+THE EXCEPTION MESSAGE IS AS FOLLOWS:
+   Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 5
+        at DiceSet.isIdentical(DiceSet.java:143)
+        at DiceSet.main(DiceSet.java:174)
+
+   Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 9
+        at DiceSet.isIdentical(DiceSet.java:143)
+        at DieAndDiceSetTestHarness.main(DieAndDiceSetTestHarness.java:204)
+
+
+TESTING THE HIGHROLL PROGRAM WITH 5 DICE, 6 SIDES EACH
+
+   Welcome to HighRoll!!
+
+     Press the 'q' key to quit the program.
+Please enter the number of dice and sides desired.
+sides must be greater than 4.  Enter the data as two integers seperated by a dash i.e 4-8
+>>
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+NOTE: ENTERED TO ROLL DIE NUMBER 5 AND THE PROGRAM THREW AN EXCEPTION.
+EXCEPTION MESSAGE IS AS FOLLOWS:
+   Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 5
+        at DiceSet.rollIndividual(DiceSet.java:97)
+        at HighRoll.main(HighRoll.java:97)
+
+
+TRYING AGAIN WITH 5-6 BUT USING ZERO-BASED INDEXING
+
+
+   Welcome to HighRoll!!
+
+     Press the 'q' key to quit the program.
+Please enter the number of dice and sides desired.
+sides must be greater than 4.  Enter the data as two integers seperated by a dash i.e 4-8
+>>
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+The score is 11
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+The high score is 11
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+The score is 21
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+The high score is 21
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+
+   Welcome to HighRoll!!
+
+     Press the 'q' key to quit the program.
+Please enter the number of dice and sides desired.
+sides must be greater than 4.  Enter the data as two integers seperated by a dash i.e 4-8
+>>
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+The score is 93
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+The high score is 93
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+The score is 108
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+The high score is 108
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+
+   Welcome to HighRoll!!
+
+     Press the 'q' key to quit the program.
+Please enter the number of dice and sides desired.
+sides must be greater than 4.  Enter the data as two integers seperated by a dash i.e 4-8
+>>
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+The score is 69
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+The high score is 69
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+Rolled
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+What die do you want to roll?
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+The score is 67
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
+The high score is 67
+
+
+Your options are:
+ROLL ALL THE DICE
+ROLL A SINGLE DIE
+CALCULATE THE SCORE FOR THIS SET
+SAVE THIS SCORE AS THE HIGH SCORE
+DISPLAY THE HIGH SCORE
+ENTER 'Q' or 'q' TO QUIT THE PROGRAM
+
