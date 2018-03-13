@@ -42,7 +42,7 @@ public class ClockSolver {
      // args[1] if present will specify a time slice value; if not present, defaults to 60 seconds
      // you may want to consider using args[2] for an "angle window"
 
-      System.out.println( "\n   Hello world, from the ClockSolver program!!\n\n" ) ;
+
       if( 0 == args.length ) {
          System.out.println( "   Sorry you must enter at least one argument\n" +
                              "   Usage: java ClockSolver <angle> [timeSlice]\n" +
@@ -52,6 +52,8 @@ public class ClockSolver {
       double angleArg = 0.0;
       double timeSliceArg = 0.0;
       double epsArg =0.0;
+
+      System.out.println("REACHES");
 
       String[] argsToReturn = new String[3];
 
@@ -120,6 +122,7 @@ public class ClockSolver {
    */
    public static void main( String args[] ) {
       ClockSolver clockSolve = new ClockSolver();
+      System.out.println( "\n   Hello world, from the ClockSolver program!!\n\n" ) ;
       //Clock clock = new Clock(12.3);     //creates dummy clock for validating angle arguments
       //double[] timeValues = new double[3];
 
