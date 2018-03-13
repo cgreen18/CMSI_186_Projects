@@ -28,7 +28,7 @@ public class Clock {
    private static final double MAXIMUM_DEGREE_VALUE = 360.0;
    private static final double HOUR_HAND_DEGREES_PER_SECOND = 0.00834;
    private static final double MINUTE_HAND_DEGREES_PER_SECOND = 0.1;
-   private final double DEFAULT_EPSILON_VALUE              = 0.1;
+   private static final double DEFAULT_EPSILON_VALUE              = 0.1;
 
    private double targAng;
    private double timeSlice;
@@ -42,25 +42,32 @@ public class Clock {
      System.out.println("Angle argument must be specified.");
      System.exit(0);
    }
+   
+    public Clock(double angleArg) {
+      targAng = angleArg%360.0;
+      timeSlice = DEFAULT_TIME_SLICE_IN_SECONDS;
+      totSecs = 0.0;
+      epsilon = DEFAULT_EPSILON_VALUE;
+    }
 
-   public Clock(double angleArg) {
-     targAng = angleArg%360.0;
-     timeSlice = DEFAULT_TIME_SLICE_IN_SECONDS;
-     totSecs = 0.0;
+    public Clock(double angleArg, double tFrameArg) {
+      targAng = angleArg%360.0;
+      timeSlice = tFrameArg;
+      totSecs = 0.0;
      epsilon = DEFAULT_EPSILON_VALUE;
-   }
-
-   public Clock(double angleArg, double tFrameArg) {
-     targAng = angleArg%360.0;
-     timeSlice = tFrameArg;
-     totSecs = 0.0;
-     epsilon = DEFAULT_EPSILON_VALUE;
-   }
+    }
    public Clock(double angleArg, double tFrameArg, double epsArg) {
      targAng = angleArg%360.0;
      timeSlice = tFrameArg;
      totSecs = 0.0;
      epsilon = epsArg;
+}
+
+   public Clock(String[] args) {
+     targAng = Double.parseDouble(args[0]);
+     timeSlice = Double.parseDouble(args[1]);
+     totSecs = 0.0;
+     epsilon = Double.parseDouble(args[2]);
    }
 
   /**
@@ -80,7 +87,7 @@ public class Clock {
    *  @return  double-precision value of the argument
    *  @throws  NumberFormatException
    */
-   public double validateAngleArg( String argValue ) throws NumberFormatException {
+   public static double validateAngleArg( String argValue ) throws NumberFormatException {
      double angToReturn = 0.0;
 
      try{
@@ -103,7 +110,7 @@ public class Clock {
    *  note: remember that the time slice, if it is small will cause the simulation
    *         to take a VERY LONG TIME to complete!
    */
-   public double validateTimeSliceArg( String argValue ) {
+   public static double validateTimeSliceArg( String argValue ) {
      double timeToReturn = 0.0;
      try{
        timeToReturn = Double.parseDouble(argValue);
@@ -115,6 +122,14 @@ public class Clock {
    }
 
 
+
+   public double getEpsVal(){
+     return epsilon;
+   }
+
+   public double getTargAng(){
+     return targAng;
+   }
 
   /**
    *  Method to calculate and return the current position of the hour hand
@@ -183,6 +198,13 @@ public class Clock {
      return (totSecs - (int)totSecs);
    }
 
+
+
+
+
+
+
+
   /**
    *  Method to return a String representation of this clock
    *  @return String value of the current clock
@@ -190,7 +212,7 @@ public class Clock {
    public String toString() {
       StringBuilder strToReturn = new StringBuilder();
 
-        strToReturn.append(calcHour());
+
         if(calcHour() == 0){
           strToReturn.append("12");
         }
@@ -238,21 +260,90 @@ public class Clock {
    *  remember you are trying to BREAK your code, not just prove it works!
    */
    public static void main( String args[] ) {
+     double angleArg = 0.0;
+     double timeSliceArg = 0.0;
+     double epsArg =0.0;
+      if (args.length == 0){
+        System.out.println("Angle argument must be specified.");
+        System.exit(0);
+      }
+
+
+      System.out.println( "    Testing validateAngleArg()....");
+
+      if (args.length == 1){
+        try{
+          angleArg = validateAngleArg(args[0]);
+        }
+        catch(NumberFormatException nfe){
+          System.out.println("Enter correct format");
+          System.exit(2);
+        }
+        timeSliceArg = DEFAULT_TIME_SLICE_IN_SECONDS;
+        epsArg = DEFAULT_EPSILON_VALUE;
+      }
+      else if (args.length == 2){
+        try{
+          angleArg = validateAngleArg(args[0]);
+        }
+        catch(NumberFormatException nfe){
+          System.out.println("Enter correct format");
+          System.exit(2);
+        }
+        try{
+          timeSliceArg = validateTimeSliceArg(args[1]);
+        }
+        catch(NumberFormatException nfe){
+          System.out.println("Enter correct format");
+          System.exit(2);
+        }
+        epsArg = DEFAULT_EPSILON_VALUE;
+      }
+      else if(args.length == 3){
+        try{
+          angleArg = validateAngleArg(args[0]);
+        }
+        catch(NumberFormatException nfe){
+          System.out.println("Enter correct format");
+          System.exit(2);
+        }
+        try{
+          timeSliceArg = validateTimeSliceArg(args[1]);
+        }
+        catch(NumberFormatException nfe){
+          System.out.println("Enter correct format");
+          System.exit(2);
+        }
+        epsArg = Double.parseDouble(args[2]);
+
+      }
 
       System.out.println( "\nCLOCK CLASS TESTER PROGRAM\n" +
                           "--------------------------\n" );
       System.out.println( "  Creating a new clock: " );
-      Clock clock = new Clock(21.2188);  //
+      Clock clock = new Clock(angleArg,timeSliceArg,epsArg);  //
       System.out.println( "    New clock created: " + clock.toString() );
-      System.out.println( "    Testing validateAngleArg()....");
+
+      System.out.println("Showing that the program can tick and can display the time at any point");
+      for (int i = 0; i < 230; i += 6){
+        clock.tick();
+        System.out.println(clock.toString());
+      }
+
       System.out.print( "      sending '  0 degrees', expecting double value   0.0" );
       try { System.out.println( (0.0 == clock.validateAngleArg( "0.0" )) ? " - got 0.0" : " - no joy" ); }
       catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-      Clock clock = new Clock(21.2188, .233);  //
-      System.out.println( "    New clock created: " + clock.toString() );
+      Clock clock2 = new Clock(21.2188, .233);  //
+      System.out.println( "    New clock created: " + clock2.toString() );
       System.out.println( "    Testing validateAngleArg()....");
       System.out.print( "      sending '  0 degrees', expecting double value   0.0" );
-      try { System.out.println( (0.0 == clock.validateAngleArg( "0.0" )) ? " - got 0.0" : " - no joy" ); }
+      try { System.out.println( (0.0 == clock2.validateAngleArg( "0.0" )) ? " - got 0.0" : " - no joy" ); }
       catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.println("Showing that the program can tick and can display the time at any point");
+      for (int i = 0; i < 230; i += 6){
+        clock2.tick();
+        System.out.println(clock2.toString());
+      }
    }
 }
