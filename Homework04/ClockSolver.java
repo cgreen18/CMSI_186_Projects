@@ -127,6 +127,7 @@ public class ClockSolver {
 
       Clock myClock = new Clock(argsStringArray);
       while( myClock.getTotalSeconds() <= 12*60*60 ) {
+          myClock.tick();
          if(Math.abs(myClock.getHandAngle()) <= myClock.getEpsVal() ){
            System.out.print("At ");
            System.out.print(myClock.toString());
