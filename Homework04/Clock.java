@@ -42,7 +42,7 @@ public class Clock {
      System.out.println("Angle argument must be specified.");
      System.exit(0);
    }
-   
+
     public Clock(double angleArg) {
       targAng = angleArg%360.0;
       timeSlice = DEFAULT_TIME_SLICE_IN_SECONDS;
@@ -344,6 +344,15 @@ public class Clock {
       for (int i = 0; i < 230; i += 6){
         clock2.tick();
         System.out.println(clock2.toString());
+      }
+
+      System.out.println("The program can even tell the hour and minutes seperately");
+      for (int i = 0; i < 230; i += 6){
+        clock2.tick();
+        System.out.println(String.valueOf(clock2.calcMin()));
+        System.out.println(String.valueOf(clock2.calcHour()));
+        System.out.println(String.valueOf(clock2.calcSecs()));
+        System.out.println(String.valueOf(clock2.calcLeftOverSecs()));
       }
    }
 }
