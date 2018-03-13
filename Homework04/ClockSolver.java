@@ -121,7 +121,7 @@ public class ClockSolver {
    public static void main( String args[] ) {
       ClockSolver clockSolve = new ClockSolver();
       //Clock clock = new Clock(12.3);     //creates dummy clock for validating angle arguments
-      double[] timeValues = new double[3];
+      //double[] timeValues = new double[3];
 
       String[] argsStringArray = handleInitialArguments( args );
 
