@@ -254,11 +254,7 @@ public class Clock {
 
 
   /**
-   *  The main program starts here
-   *  remember the constraints from the project description
-   *  @see  http://bjohnson.lmu.build/cmsi186web/homework04.html
-   *  be sure to make LOTS of tests!!
-   *  remember you are trying to BREAK your code, not just prove it works!
+   *  My main() hopes to demonstrate every aspect of my code
    */
    public static void main( String args[] ) {
      double angleArg = 0.0;
@@ -275,7 +271,7 @@ public class Clock {
       }
 
 
-      System.out.println( "Now, it is putting the arguments through validation");
+      System.out.println( "Now, it is putting the arguments through validation \n");
 
       if (args.length == 1){
         try{
@@ -323,7 +319,7 @@ public class Clock {
         epsArg = Double.parseDouble(args[2]);
       }
 
-      System.out.println("If this prints, then the arguments were valid");
+      System.out.println("If this prints, then the arguments were valid\n\n\n");
 
 
       System.out.println( "  Creating a new clock: " );
@@ -332,34 +328,58 @@ public class Clock {
 
       System.out.println("Showing that the program can tick and can display the time at any point");
       System.out.println("The toString method uses four methods to calculate the time and formate well");
-      for (int i = 0; i < 230; i += 6){
-        clock.tick();
+      for (int i = 0; i < 5; i++){
+        for(int j = 0; j <= 45; j++){
+          clock.tick();
+        }
+        System.out.print("Here's the time: ");
         System.out.println(clock.toString());
       }
 
-      System.out.print( "      sending '  0 degrees', expecting double value   0.0" );
+      System.out.print( "\n\n\n      sending '  0 degrees', expecting double value   0.0" );
       try { System.out.println( (0.0 == clock.validateAngleArg( "0.0" )) ? " - got 0.0" : " - no joy" ); }
       catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
       Clock clock2 = new Clock(21.2188, .233);  //
-      System.out.println( "    New clock created: " + clock2.toString() );
+      System.out.println( " \n\n\n   New clock created: " + clock2.toString() );
       System.out.println( "    Testing validateAngleArg()....");
       System.out.print( "      sending '  0 degrees', expecting double value   0.0" );
       try { System.out.println( (0.0 == clock2.validateAngleArg( "0.0" )) ? " - got 0.0" : " - no joy" ); }
       catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
 
-      System.out.println("Showing that the program can tick and can display the time at any point");
+      System.out.println("\n\nShowing that the program can tick and can display the time at any point");
       for (int i = 0; i < 230; i += 6){
         clock2.tick();
+        System.out.print("Current time: ");
         System.out.println(clock2.toString());
       }
 
-      System.out.println("The program can even tell the hour and minutes seperately");
-      for (int i = 0; i < 230; i += 6){
-        clock2.tick();
-        System.out.println(String.valueOf(clock2.calcMin()));
+      System.out.println("\n\nThe program can even tell the hour and minutes seperately");
+      for (int i = 0; i < 5; i ++){
+        for(int j = 0; j <= 45; j++){    //ticks 45 times
+          clock2.tick();
+        }
+        System.out.print("Hour: ");
+
         System.out.println(String.valueOf(clock2.calcHour()));
+        System.out.print("Minutes: ");
+        System.out.println(String.valueOf(clock2.calcMin()));
+        System.out.print("Seconds: ");
         System.out.println(String.valueOf(clock2.calcSecs()));
+        System.out.print("Decimal Seconds: ");
         System.out.println(String.valueOf(clock2.calcLeftOverSecs()));
+      }
+
+      System.out.println("\n\nThe program can tell each angle and the angle between");
+      for (int i = 0; i < 5; i ++){
+        for(int j = 0; j <= 45; j++){
+          clock2.tick();
+        }
+          System.out.print("Hour angle: ");
+        System.out.println(String.valueOf(clock2.getHourHandAngle()));
+          System.out.print("Minute angle: ");
+        System.out.println(String.valueOf(clock2.getMinuteHandAngle()));
+          System.out.print("Angle between: ");
+        System.out.println(String.valueOf(clock2.getHandAngle()));
       }
    }
 }
