@@ -63,7 +63,7 @@ public class Clock {
      epsilon = epsArg;
 }
 
-   public Clock(String[] args) {
+   public Clock(String[] args) {   //assuming args were already checked
      targAng = Double.parseDouble(args[0]);
      timeSlice = Double.parseDouble(args[1]);
      totSecs = 0.0;
@@ -195,7 +195,8 @@ public class Clock {
    }
 
    public double calcLeftOverSecs(){
-     return (totSecs - (int)totSecs);
+     double quickFormat = ((int)(1000.0*totSecs)-1000*(int)totSecs)/1000.0;  //returns 3 digits past decimal
+     return quickFormat;
    }
 
 
@@ -263,13 +264,18 @@ public class Clock {
      double angleArg = 0.0;
      double timeSliceArg = 0.0;
      double epsArg =0.0;
+
+     System.out.println( "\nCLOCK CLASS TESTER PROGRAM\n" +
+                         "--------------------------\n" );
+
+     System.out.println("This code will only work if you input at least one argument");
       if (args.length == 0){
         System.out.println("Angle argument must be specified.");
         System.exit(0);
       }
 
 
-      System.out.println( "    Testing validateAngleArg()....");
+      System.out.println( "Now, it is putting the arguments through validation");
 
       if (args.length == 1){
         try{
@@ -315,16 +321,17 @@ public class Clock {
           System.exit(2);
         }
         epsArg = Double.parseDouble(args[2]);
-
       }
 
-      System.out.println( "\nCLOCK CLASS TESTER PROGRAM\n" +
-                          "--------------------------\n" );
+      System.out.println("If this prints, then the arguments were valid");
+
+
       System.out.println( "  Creating a new clock: " );
       Clock clock = new Clock(angleArg,timeSliceArg,epsArg);  //
       System.out.println( "    New clock created: " + clock.toString() );
 
       System.out.println("Showing that the program can tick and can display the time at any point");
+      System.out.println("The toString method uses four methods to calculate the time and formate well");
       for (int i = 0; i < 230; i += 6){
         clock.tick();
         System.out.println(clock.toString());
