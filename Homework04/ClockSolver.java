@@ -2,7 +2,7 @@
  *  File name     :  ClockSolver.java
  *  Purpose       :  The main program for the ClockSolver class
  *  @see
- *  @author       :  Conor Green
+ *  @author       :  B.J. Johnson
  *  Date written  :  2017-02-28
  *  Description   :  This class provides a bunch of methods which may be useful for the ClockSolver class
  *                   for Homework 4, part 1.  Includes the following:
@@ -123,8 +123,8 @@ public class ClockSolver {
    public static void main( String args[] ) {
       ClockSolver clockSolve = new ClockSolver();
       System.out.println( "\n   Hello world, from the ClockSolver program!!\n\n" ) ;
-      //Clock clock = new Clock(12.3);     //creates dummy clock for validating angle arguments
-      //double[] timeValues = new double[3];
+      System.out.println("**Remember that the epsilon value may not allow certain times to pass");
+      System.out.println("**To high of epsilon will give many times and too low won't give many");
 
       String[] argsStringArray = handleInitialArguments( args );
 
