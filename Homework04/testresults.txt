@@ -1,0 +1,413 @@
+. 
+. 
+successful compilation 
+. 
+. 
+
+CLOCK CLASS TESTER PROGRAM
+--------------------------
+
+This code will only work if you input at least one argument
+Angle argument must be specified.
+
+CLOCK CLASS TESTER PROGRAM
+--------------------------
+
+This code will only work if you input at least one argument
+Now, it is putting the arguments through validation 
+
+If this prints, then the arguments were valid
+
+
+
+  Creating a new clock: 
+    New clock created: 12:00:00:0.0
+Showing that the program can tick and can display the time at any point
+The toString method uses four methods to calculate the time and formate well
+Here's the time: 12:46:00:0.0
+Here's the time: 01:32:00:0.0
+Here's the time: 02:18:00:0.0
+Here's the time: 03:04:00:0.0
+Here's the time: 03:50:00:0.0
+
+
+
+      sending '  0 degrees', expecting double value   0.0 - got 0.0
+ 
+
+
+   New clock created: 12:00:00:0.0
+    Testing validateAngleArg()....
+      sending '  0 degrees', expecting double value   0.0 - got 0.0
+
+
+Showing that the program can tick and can display the time at any point
+Current time: 12:00:00:0.233
+Current time: 12:00:00:0.466
+Current time: 12:00:00:0.699
+Current time: 12:00:00:0.932
+Current time: 12:00:01:0.165
+Current time: 12:00:01:0.398
+Current time: 12:00:01:0.631
+Current time: 12:00:01:0.864
+Current time: 12:00:02:0.097
+Current time: 12:00:02:0.33
+Current time: 12:00:02:0.563
+Current time: 12:00:02:0.796
+Current time: 12:00:03:0.029
+Current time: 12:00:03:0.262
+Current time: 12:00:03:0.495
+Current time: 12:00:03:0.728
+Current time: 12:00:03:0.961
+Current time: 12:00:04:0.194
+Current time: 12:00:04:0.427
+Current time: 12:00:04:0.66
+Current time: 12:00:04:0.893
+Current time: 12:00:05:0.125
+Current time: 12:00:05:0.358
+Current time: 12:00:05:0.591
+Current time: 12:00:05:0.824
+Current time: 12:00:06:0.057
+Current time: 12:00:06:0.29
+Current time: 12:00:06:0.523
+Current time: 12:00:06:0.756
+Current time: 12:00:06:0.989
+Current time: 12:00:07:0.222
+Current time: 12:00:07:0.455
+Current time: 12:00:07:0.688
+Current time: 12:00:07:0.921
+Current time: 12:00:08:0.154
+Current time: 12:00:08:0.387
+Current time: 12:00:08:0.62
+Current time: 12:00:08:0.853
+Current time: 12:00:09:0.086
+
+
+The program can even tell the hour and minutes seperately
+Hour: 0
+Minutes: 0
+Seconds: 19
+Decimal Seconds: 0.805
+Hour: 0
+Minutes: 0
+Seconds: 30
+Decimal Seconds: 0.523
+Hour: 0
+Minutes: 0
+Seconds: 41
+Decimal Seconds: 0.24
+Hour: 0
+Minutes: 0
+Seconds: 51
+Decimal Seconds: 0.958
+Hour: 0
+Minutes: 1
+Seconds: 2
+Decimal Seconds: 0.676
+
+
+The program can tell each angle and the angle between
+Hour angle: 0.6121142999999983
+Minute angle: 7.33949999999998
+Angle between: 6.7273856999999815
+Hour angle: 0.7015024199999998
+Minute angle: 8.411299999999999
+Angle between: 7.709797579999999
+Hour angle: 0.7908905400000015
+Minute angle: 9.483100000000018
+Angle between: 8.692209460000017
+Hour angle: 0.880278660000003
+Minute angle: 10.554900000000037
+Angle between: 9.674621340000034
+Hour angle: 0.9696667800000046
+Minute angle: 11.626700000000056
+Angle between: 10.657033220000052
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+   Sorry you must enter at least one argument
+   Usage: java ClockSolver <angle> [timeSlice]
+   Please try again...........
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+At 12:00:-1:0.0 the clock reaches: 0.0
+At -1:-5:-27:0.0 the clock reaches: 0.0
+At -1:-5:-28:0.0 the clock reaches: 0.0
+At -2:-10:-55:0.0 the clock reaches: 0.0
+At -2:-10:-56:0.0 the clock reaches: 0.0
+At -3:-16:-22:0.0 the clock reaches: 0.0
+At -3:-16:-23:0.0 the clock reaches: 0.0
+At -4:-21:-50:0.0 the clock reaches: 0.0
+At -4:-21:-51:0.0 the clock reaches: 0.0
+At -5:-27:-17:0.0 the clock reaches: 0.0
+At -5:-27:-18:0.0 the clock reaches: 0.0
+At -6:-32:-45:0.0 the clock reaches: 0.0
+At -6:-32:-46:0.0 the clock reaches: 0.0
+At -7:-38:-12:0.0 the clock reaches: 0.0
+At -7:-38:-13:0.0 the clock reaches: 0.0
+At -8:-43:-40:0.0 the clock reaches: 0.0
+At -8:-43:-41:0.0 the clock reaches: 0.0
+At -9:-49:-7:0.0 the clock reaches: 0.0
+At -9:-49:-8:0.0 the clock reaches: 0.0
+At -9:-49:-9:0.0 the clock reaches: 0.0
+At -10:-54:-35:0.0 the clock reaches: 0.0
+At -10:-54:-36:0.0 the clock reaches: 0.0
+At -12:00:-3:0.0 the clock reaches: 0.0
+At -12:00:-4:0.0 the clock reaches: 0.0
+At -13:-5:-30:0.0 the clock reaches: 0.0
+At -13:-5:-31:0.0 the clock reaches: 0.0
+At -14:-10:-58:0.0 the clock reaches: 0.0
+At -14:-10:-59:0.0 the clock reaches: 0.0
+At -15:-16:-25:0.0 the clock reaches: 0.0
+At -15:-16:-26:0.0 the clock reaches: 0.0
+At -16:-21:-53:0.0 the clock reaches: 0.0
+At -16:-21:-54:0.0 the clock reaches: 0.0
+At -17:-27:-20:0.0 the clock reaches: 0.0
+At -17:-27:-21:0.0 the clock reaches: 0.0
+At -17:-27:-22:0.0 the clock reaches: 0.0
+At -18:-32:-48:0.0 the clock reaches: 0.0
+At -18:-32:-49:0.0 the clock reaches: 0.0
+At -19:-38:-15:0.0 the clock reaches: 0.0
+At -19:-38:-16:0.0 the clock reaches: 0.0
+At -19:-38:-17:0.0 the clock reaches: 0.0
+At -20:-43:-43:0.0 the clock reaches: 0.0
+At -20:-43:-44:0.0 the clock reaches: 0.0
+At -21:-49:-11:0.0 the clock reaches: 0.0
+At -21:-49:-12:0.0 the clock reaches: 0.0
+At -22:-54:-38:0.0 the clock reaches: 0.0
+At -22:-54:-39:0.0 the clock reaches: 0.0
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+Enter correct format
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+At 01:00:00:0.0 the clock reaches: 30.0
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+At 01:00:00:0.0 the clock reaches: 30.0
+At 03:21:50:0.0 the clock reaches: 30.0
+At 05:21:50:0.0 the clock reaches: 30.0
+At 07:43:40:0.0 the clock reaches: 30.0
+At 09:43:40:0.0 the clock reaches: 30.0
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+At 12:05:27:0.0 the clock reaches: 30.0
+At 12:05:28:0.0 the clock reaches: 30.0
+At 01:00:00:0.0 the clock reaches: 30.0
+At 01:00:01:0.0 the clock reaches: 30.0
+At 01:10:54:0.0 the clock reaches: 30.0
+At 01:10:55:0.0 the clock reaches: 30.0
+At 02:05:27:0.0 the clock reaches: 30.0
+At 02:05:28:0.0 the clock reaches: 30.0
+At 02:16:22:0.0 the clock reaches: 30.0
+At 02:16:23:0.0 the clock reaches: 30.0
+At 03:10:55:0.0 the clock reaches: 30.0
+At 03:10:56:0.0 the clock reaches: 30.0
+At 03:21:49:0.0 the clock reaches: 30.0
+At 03:21:50:0.0 the clock reaches: 30.0
+At 03:21:51:0.0 the clock reaches: 30.0
+At 04:16:22:0.0 the clock reaches: 30.0
+At 04:16:23:0.0 the clock reaches: 30.0
+At 04:16:24:0.0 the clock reaches: 30.0
+At 04:27:17:0.0 the clock reaches: 30.0
+At 04:27:18:0.0 the clock reaches: 30.0
+At 05:21:50:0.0 the clock reaches: 30.0
+At 05:21:51:0.0 the clock reaches: 30.0
+At 05:32:44:0.0 the clock reaches: 30.0
+At 05:32:45:0.0 the clock reaches: 30.0
+At 05:32:46:0.0 the clock reaches: 30.0
+At 06:27:17:0.0 the clock reaches: 30.0
+At 06:27:18:0.0 the clock reaches: 30.0
+At 06:27:19:0.0 the clock reaches: 30.0
+At 06:38:12:0.0 the clock reaches: 30.0
+At 06:38:13:0.0 the clock reaches: 30.0
+At 07:32:45:0.0 the clock reaches: 30.0
+At 07:32:46:0.0 the clock reaches: 30.0
+At 07:43:40:0.0 the clock reaches: 30.0
+At 07:43:41:0.0 the clock reaches: 30.0
+At 08:38:13:0.0 the clock reaches: 30.0
+At 08:38:14:0.0 the clock reaches: 30.0
+At 08:49:07:0.0 the clock reaches: 30.0
+At 08:49:08:0.0 the clock reaches: 30.0
+At 09:43:40:0.0 the clock reaches: 30.0
+At 09:43:41:0.0 the clock reaches: 30.0
+At 09:54:35:0.0 the clock reaches: 30.0
+At 09:54:36:0.0 the clock reaches: 30.0
+At 10:49:08:0.0 the clock reaches: 30.0
+At 10:49:09:0.0 the clock reaches: 30.0
+At 11:00:02:0.0 the clock reaches: 30.0
+At 11:00:03:0.0 the clock reaches: 30.0
+At 11:54:35:0.0 the clock reaches: 30.0
+At 11:54:36:0.0 the clock reaches: 30.0
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+At 08:30:00:0.0 the clock reaches: 75.23
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+At 01:57:15:0.0 the clock reaches: 75.23
+At 03:02:42:0.0 the clock reaches: 75.23
+At 04:08:09:0.0 the clock reaches: 75.23
+At 05:13:36:0.0 the clock reaches: 75.23
+At 08:57:22:0.0 the clock reaches: 75.23
+At 10:02:49:0.0 the clock reaches: 75.23
+At 11:08:16:0.0 the clock reaches: 75.23
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+At 12:13:40:0.299 the clock reaches: 75.23
+At 12:13:41:0.599 the clock reaches: 75.23
+At 12:51:47:0.0 the clock reaches: 75.23
+At 01:19:07:0.6 the clock reaches: 75.23
+At 01:19:08:0.9 the clock reaches: 75.23
+At 01:57:14:0.3 the clock reaches: 75.23
+At 02:24:34:0.9 the clock reaches: 75.23
+At 02:24:36:0.2 the clock reaches: 75.23
+At 03:02:41:0.599 the clock reaches: 75.23
+At 03:02:42:0.899 the clock reaches: 75.23
+At 03:30:03:0.499 the clock reaches: 75.23
+At 04:08:08:0.899 the clock reaches: 75.23
+At 04:08:10:0.199 the clock reaches: 75.23
+At 04:35:30:0.799 the clock reaches: 75.23
+At 05:13:36:0.199 the clock reaches: 75.23
+At 05:13:37:0.499 the clock reaches: 75.23
+At 05:40:58:0.099 the clock reaches: 75.23
+At 05:40:59:0.399 the clock reaches: 75.23
+At 06:19:04:0.799 the clock reaches: 75.23
+At 06:46:25:0.399 the clock reaches: 75.23
+At 06:46:26:0.699 the clock reaches: 75.23
+At 07:24:32:0.099 the clock reaches: 75.23
+At 07:51:52:0.699 the clock reaches: 75.23
+At 07:51:53:0.999 the clock reaches: 75.23
+At 08:29:59:0.399 the clock reaches: 75.23
+At 08:30:00:0.699 the clock reaches: 75.23
+At 08:57:21:0.299 the clock reaches: 75.23
+At 09:35:26:0.699 the clock reaches: 75.23
+At 09:35:27:0.999 the clock reaches: 75.23
+At 10:02:48:0.599 the clock reaches: 75.23
+At 10:40:53:0.999 the clock reaches: 75.23
+At 10:40:55:0.299 the clock reaches: 75.23
+At 11:08:15:0.9 the clock reaches: 75.23
+At 11:08:17:0.2 the clock reaches: 75.23
+At 11:46:22:0.6 the clock reaches: 75.23
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+At 12:16:22:0.5 the clock reaches: 90.0
+At 12:49:05:0.0 the clock reaches: 90.0
+At 01:21:50:0.0 the clock reaches: 90.0
+At 01:54:32:0.5 the clock reaches: 90.0
+At 02:27:17:0.5 the clock reaches: 90.0
+At 03:00:00:0.0 the clock reaches: 90.0
+At 03:32:45:0.0 the clock reaches: 90.0
+At 04:05:27:0.5 the clock reaches: 90.0
+At 04:38:12:0.5 the clock reaches: 90.0
+At 05:10:55:0.0 the clock reaches: 90.0
+At 05:43:40:0.0 the clock reaches: 90.0
+At 06:16:22:0.5 the clock reaches: 90.0
+At 06:49:07:0.5 the clock reaches: 90.0
+At 07:21:50:0.0 the clock reaches: 90.0
+At 07:54:35:0.0 the clock reaches: 90.0
+At 08:27:17:0.5 the clock reaches: 90.0
+At 09:00:02:0.5 the clock reaches: 90.0
+At 10:05:30:0.0 the clock reaches: 90.0
+At 11:10:57:0.5 the clock reaches: 90.0
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+At 12:32:43:0.799 the clock reaches: 180.0
+At 01:38:11:0.4 the clock reaches: 180.0
+At 02:43:38:0.999 the clock reaches: 180.0
+At 03:49:06:0.599 the clock reaches: 180.0
+At 04:54:34:0.199 the clock reaches: 180.0
+At 06:00:01:0.799 the clock reaches: 180.0
+At 07:05:29:0.399 the clock reaches: 180.0
+At 08:10:56:0.999 the clock reaches: 180.0
+At 09:16:24:0.599 the clock reaches: 180.0
+At 10:21:52:0.199 the clock reaches: 180.0
+At 11:27:19:0.8 the clock reaches: 180.0
+
+   Hello world, from the ClockSolver program!!
+
+
+**Remember that the epsilon value may not allow certain times to pass
+**To high of epsilon will give many times and too low won't give many
+REACHES
+At 03:00:00:0.0 the clock reaches: 90.0
