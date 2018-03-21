@@ -5,8 +5,8 @@
 
 public class SoccerSim{
 
-  public static final FIELD_X_LEN = 1000;
-  public static final FIELD_Y_LEN = 500;
+  public static final double FIELD_X_LEN = 1000.0;
+  public static final double FIELD_Y_LEN = 500.0;
 
   public SoccerSim(){
 
@@ -93,7 +93,7 @@ public class SoccerSim{
       throw nfe;
     }
 
-    if (dblXPos<= 0 || dblYPos <= 0 || dblXPos > FIELD_X_LEN || dblYPos > FIELD_Y_LEN ){
+    if (dblXPos<= -(FIELD_X_LEN/2) || dblYPos <= -(FIELD_Y_LEN/2) || dblXPos > (FIELD_X_LEN/2) || dblYPos > (FIELD_Y_LEN/2) ){
       throw new IllegalArgumentException("Enter valid position values");
     }
 
@@ -102,8 +102,22 @@ public class SoccerSim{
     return strMatToReturn;
   }
 
-  private String valiVelArgs(String xVelArg, String yVelArg) throws NumberFormatException, IllegalArgumentException{
+  private String valiVelArgs(String xVelArg, String yVelArg) throws NumberFormatException{
+    double dblXVel;
+    double dblYVel;
+    String[] strMatToReturn = new String[2];
 
+    try{
+      dblXVel = Double.parseDouble(xVelArg);
+      dblYVel = Double.parseDouble(yVelArg);
+    }
+    catch(NumberFormatException nfe){
+      throw nfe;
+    }
+
+    strMatToReturn[0] = xPosArg;
+    strMatToReturn[1] = yPosArg;
+    return strMatToReturn;
   }
 
   public static void main(String args[]){
