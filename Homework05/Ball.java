@@ -31,11 +31,38 @@ public class Ball{
     yVel = yVel - ((yVel*.01)*timeSlice);
   }
 
-  public String toString(){
-    String strToReturn = "";
-    strToReturn = String.format("The ball's current position is: (%4.2f,%4.2f) \n", xPos,yPos);
-    strToReturn = strToReturn + String.format("The ball's current velocity is: (%4.2f,%4.2f) \n",xVel,yVel);
+  public String[] myToString(){
+    String[] strToReturn = new String[2];
+
+    strToReturn[0] = String.format(" is currently at: (%4.2f,%4.2f) \n", xPos,yPos);
+    strToReturn[1] = String.format("And has a velocity of: (%4.2f,%4.2f) \n\n",xVel,yVel);
+
     return strToReturn;
+  }
+
+  public double getXPos(){
+    return xPos;
+  }
+
+  public double getYPos(){
+    return yPos;
+  }
+
+  public int onField(double fieldX, double fieldY){
+
+    if (xPos > fieldX/2 || xPos < -fieldX/2 || yPos > fieldY/2 || yPos < -fieldY/2){
+      return 0;   //0 means it is off the field
+    }
+
+    return 1;    //1 means it is on the field
+  }
+
+  public int isMoving(){
+    if(xVel*yVel == 0){
+      return 0;   //not moving
+    }
+
+    return 1;   //moving
   }
 
   public static void main(String args[]){
