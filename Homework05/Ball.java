@@ -58,8 +58,8 @@ public class Ball{
   }
 
   public int isMoving(){
-    if(xVel*yVel == 0){
-      return 0;   //not moving
+    if(Math.sqrt(Math.pow(xVel,2)+Math.pow(yVel,2)) <= 1/12){
+      return 0;
     }
 
     return 1;   //moving
