@@ -10,25 +10,43 @@ public class SoccerSim{
   public static final double BALL_WEIGHT = 1.0;   //pounds
   public static final double BALL_RADIUS = 4.45/12.0;  //feet
   public static final String DEFAULT_TIME_SLICE = "1.0";  //seconds
+  public static final int MAX_POLES = 5;
+  public static final String USAGE = "USAGE: <ball parameters> <ball parameters>... <*optional timeslice> \nwhere <ball parameters> is <xPosition,yPosition,xVelocity,yVelocity>";
 
-
-  private double numBalls;
+  private int numBalls;
   private Ball[] ballArr;
   private double totalSeconds;
   private double timeSlice;
 
-  public SoccerSim(String inputArgs[]){  //inputArgs have already been vlaidated
+  private int numPoles;
+  private double[] polesX;
+  private double[] polesY;
+
+ //inputArgs have already been vlaidated
+  public SoccerSim(String inputArgs[]){
+    //setting variables
     numBalls = (int)(inputArgs.length/4);
     totalSeconds = 0.0;
     timeSlice = Double.parseDouble(inputArgs[inputArgs.length-1]);
 
+    //creates a random number of poles in random spots
+    numPoles = (int)(Math.random()*MAX_POLES);
+    polesX = new double[numPoles];
+    polesY = new double[numPoles];
+    for (int i = 0; i < numPoles; i++){
+      polesX[i] = (Math.random()*FIELD_X_LEN -FIELD_X_LEN/2);
+      polesY[i] = (Math.random()*FIELD_Y_LEN -FIELD_Y_LEN/2);
+    }
+
+    //creating ball array
+    ballArr = new Ball[numBalls];
     for (int i = 0; i < numBalls*4-1; i+=4){
       ballArr[(i/4)] = new Ball(timeSlice,Double.parseDouble(inputArgs[i]),Double.parseDouble(inputArgs[i+1]),Double.parseDouble(inputArgs[i+2]),Double.parseDouble(inputArgs[i+3]));
     }
 
   }
 
-  private static String[] validateArgs(String inputArgs[]) throws NumberFormatException, IllegalArgumentException {
+  private static String[] validateArgs(String inputArgs[]) throws IllegalArgumentException {
     String[] strMatToReturn;
 
 
@@ -46,10 +64,8 @@ public class SoccerSim{
           valiVelArgs(inputArgs[i+2],inputArgs[i+3]);
         }
         catch(IllegalArgumentException iae){
-          throw iae;
-        }
-        catch(NumberFormatException nfe){
-          throw nfe;
+          System.out.println(iae.toString());
+          System.exit(1);
         }
       }
 
@@ -67,34 +83,32 @@ public class SoccerSim{
           valiVelArgs(inputArgs[i+2],inputArgs[i+3]);
         }
         catch(IllegalArgumentException iae){
-          throw iae;
+          System.out.println(iae.toString());
+          System.exit(1);
         }
-        catch(NumberFormatException nfe){
-          throw nfe;
-        }
+
       }
       try{
         valiTimeSliceArg(inputArgs[inputArgs.length-1]);
       }
       catch(IllegalArgumentException iae){
-        throw iae;
-      }
-      catch(NumberFormatException nfe){
-        throw nfe;
+        System.out.println(iae.toString());
+        System.exit(1);
       }
     }
 
     return inputArgs;  //will only return if no exceptions are thrown
   }
 
-  private static String valiTimeSliceArg(String timeSliceArg) throws NumberFormatException, IllegalArgumentException{
-    double dblTimeSlice;
+  private static String valiTimeSliceArg(String timeSliceArg) throws IllegalArgumentException{
+    double dblTimeSlice = 0.0;
 
     try{
       dblTimeSlice = Double.parseDouble(timeSliceArg);
     }
     catch(NumberFormatException nfe){
-      throw nfe;
+      System.out.println(nfe.toString());
+      System.exit(2);
     }
 
     if (dblTimeSlice <= 0 ){
@@ -104,9 +118,9 @@ public class SoccerSim{
     return timeSliceArg;
   }
 
-  private static String[] valiPosArgs(String xPosArg, String yPosArg) throws NumberFormatException, IllegalArgumentException{
-    double dblXPos;
-    double dblYPos;
+  private static String[] valiPosArgs(String xPosArg, String yPosArg) throws IllegalArgumentException{
+    double dblXPos = 0.0;
+    double dblYPos = 0.0;
     String[] strMatToReturn = new String[2];
 
     try{
@@ -114,7 +128,8 @@ public class SoccerSim{
       dblYPos = Double.parseDouble(yPosArg);
     }
     catch(NumberFormatException nfe){
-      throw nfe;
+      System.out.println(nfe.toString());
+      System.exit(2);
     }
 
     if (dblXPos<= -(FIELD_X_LEN/2) || dblYPos <= -(FIELD_Y_LEN/2) || dblXPos > (FIELD_X_LEN/2) || dblYPos > (FIELD_Y_LEN/2) ){
@@ -126,7 +141,7 @@ public class SoccerSim{
     return strMatToReturn;
   }
 
-  private static String[] valiVelArgs(String xVelArg, String yVelArg) throws NumberFormatException{
+  private static String[] valiVelArgs(String xVelArg, String yVelArg){
     double dblXVel;
     double dblYVel;
     String[] strMatToReturn = new String[2];
@@ -136,7 +151,8 @@ public class SoccerSim{
       dblYVel = Double.parseDouble(yVelArg);
     }
     catch(NumberFormatException nfe){
-      throw nfe;
+      System.out.println(nfe.toString());
+      System.exit(2);
     }
 
     strMatToReturn[0] = xVelArg;
@@ -145,8 +161,9 @@ public class SoccerSim{
   }//ends valiVelArgs()
 
   private double[] collisionDetect(){
-    double[] collReport = new double[7];
-    collReport[0] = -1; //flag
+    double[] collReport = new double[8];
+    collReport[0] = -1.0; //flag
+    collReport[7] = 0.0;
     String[] strCatch = new String[2];
 
     for (int i = 0; i < numBalls - 1; i++){
@@ -159,6 +176,22 @@ public class SoccerSim{
           collReport[4] = ballArr[i].getYPos();
           collReport[5] = ballArr[j].getXPos();
           collReport[6] = ballArr[j].getYPos();
+          collReport[7] = 1.0;    //ball-ball collision
+        }
+      }
+    }
+
+    for (int i = 0; i < numBalls; i++){
+      for(int j = i+1; j < numPoles; j++){
+        if(calcDistPoles(ballArr[i],polesX[j],polesY[j]) <= BALL_RADIUS){
+          collReport[0] = totalSeconds;
+          collReport[1] = i;
+          collReport[2] = j;
+          collReport[3] = ballArr[i].getXPos();
+          collReport[4] = ballArr[i].getYPos();
+          collReport[5] = polesX[j];
+          collReport[6] = polesY[j];
+          collReport[7] = 2.0;     //ball-pole collision
         }
       }
     }
@@ -168,6 +201,10 @@ public class SoccerSim{
 
   private double calcDist(Ball ballOne, Ball ballTwo){
     return (Math.sqrt(Math.pow(ballOne.getXPos()-ballTwo.getXPos(),2)+Math.pow(ballOne.getYPos()-ballTwo.getYPos(),2)));
+  }//ends calcDist()
+
+  private double calcDistPoles(Ball ballOne, double xPolePos, double yPolePos){
+    return (Math.sqrt(Math.pow(ballOne.getXPos()-xPolePos,2)+Math.pow(ballOne.getYPos()-yPolePos,2)));
   }//ends calcDist()
 
   private boolean ballsOnField(){
@@ -213,7 +250,7 @@ public class SoccerSim{
 
   public static void main(String args[]){
     double[] firstColl = new double [7];
-    firstColl[0] = -1;    //flag that no coll has been recorded yet
+    firstColl[0] = -1.0;    //flag that no coll has been recorded yet
 
     try{
       SoccerSim mySim = new SoccerSim(validateArgs(args));
@@ -221,10 +258,6 @@ public class SoccerSim{
     catch(IllegalArgumentException iae){
       System.out.println(iae.toString());
       System.exit(1);
-    }
-    catch(NumberFormatException nfe){
-      System.out.println(nfe.toString());
-      System.exit(2);
     }
 
     SoccerSim mySim = new SoccerSim(validateArgs(args));
@@ -242,9 +275,13 @@ public class SoccerSim{
     }//end main while
 
     //final print
-    if(firstColl[0] != 1){
+    if(firstColl[0] != -1.0 && firstColl[7] == 1.0){
       System.out.printf("The first collision occured at %4.3f seconds between balls %d and %d. \n",firstColl[0],firstColl[1],firstColl[2]);
       System.out.printf("Ball %d was at (%4.2f,%4.2f) and ball %d was at (%4.2f,%4.2f).\n",firstColl[1],firstColl[2],firstColl[3],firstColl[4],firstColl[5],firstColl[6]);
+    }
+    else if(firstColl[0] != -1.0 && firstColl[7] == 2.0){
+      System.out.printf("The first collision occured at %4.3f seconds between ball %d and pole %d. \n",firstColl[0],firstColl[1],firstColl[2]);
+      System.out.printf("Ball %d was at (%4.2f,%4.2f) and pole %d was at (%4.2f,%4.2f).\n",firstColl[1],firstColl[2],firstColl[3],firstColl[4],firstColl[5],firstColl[6]);
     }
     else{
       System.out.println("NO COLLISION POSSIBLE.");
