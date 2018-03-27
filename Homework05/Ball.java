@@ -7,12 +7,12 @@
 public class Ball{
 
   private double timeSlice;
-  private static double xPos;    //feet
-  private static double yPos;   //feet
+  private double xPos;    //feet
+  private double yPos;   //feet
   private double xVel;          //feet/second
   private double yVel;
 
-  public Ball(double timeSliceArg, double xPosArg, double yPosArg, double xVelArg, double yVelArg){
+  public Ball( double timeSliceArg,double xPosArg, double yPosArg, double xVelArg, double yVelArg){
     timeSlice = timeSliceArg;
     xPos = xPosArg;
     yPos = yPosArg;
@@ -50,7 +50,7 @@ public class Ball{
 
   public int onField(double fieldX, double fieldY){
 
-    if (xPos > fieldX/2 || xPos < -fieldX/2 || yPos > fieldY/2 || yPos < -fieldY/2){
+    if (xPos > 0.5*fieldX || xPos < -0.5*fieldX || yPos > 0.5*fieldY || yPos < -0.5*fieldY){
       return 0;   //0 means it is off the field
     }
 
@@ -58,7 +58,7 @@ public class Ball{
   }
 
   public int isMoving(){
-    if(Math.sqrt(Math.pow(xVel,2)+Math.pow(yVel,2)) <= 1/12){
+    if(Math.sqrt(Math.pow(xVel,2)+Math.pow(yVel,2)) <= 1.0/12.0){
       return 0;
     }
 
@@ -66,20 +66,26 @@ public class Ball{
   }
 
   public static void main(String args[]){
-      Ball myBall = new Ball(Double.parseDouble(args[0]),Double.parseDouble(args[1]),Double.parseDouble(args[2]),Double.parseDouble(args[3]),Double.parseDouble(args[4]));
-      System.out.println(myBall.toString());
+      Ball myBall = new Ball(Double.parseDouble(args[4]),Double.parseDouble(args[0]),Double.parseDouble(args[1]),Double.parseDouble(args[2]),Double.parseDouble(args[3]));
+      //Ball myBall = new Ball(1,200,50,150,100); 
+      System.out.println(myBall.myToString()[0]);
+      System.out.println(myBall.myToString()[1]);
       myBall.move();
       myBall.reCalcVels();
-      System.out.println(myBall.toString());
+      System.out.println(myBall.myToString()[0]);
+      System.out.println(myBall.myToString()[1]);
       myBall.move();
       myBall.reCalcVels();
-      System.out.println(myBall.toString());
+      System.out.println(myBall.myToString()[0]);
+      System.out.println(myBall.myToString()[1]);
       myBall.move();
       myBall.reCalcVels();
-      System.out.println(myBall.toString());
+      System.out.println(myBall.myToString()[0]);
+      System.out.println(myBall.myToString()[1]);
       myBall.move();
       myBall.reCalcVels();
-      System.out.println(myBall.toString());
+      System.out.println(myBall.myToString()[0]);
+      System.out.println(myBall.myToString()[1]);
       myBall.move();
       myBall.reCalcVels();
   }
