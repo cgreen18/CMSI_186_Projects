@@ -171,7 +171,7 @@ public class SoccerSim{
 
     for (int i = 0; i < numBalls - 1; i++){
       for(int j = i+1; j < numBalls; j++){
-        if(calcDist(ballArr[i],ballArr[j]) <= BALL_RADIUS){
+        if(calcDist(ballArr[i],ballArr[j]) <= 2.0*BALL_RADIUS){
           collReport[0] = totalSeconds;
           collReport[1] = i;
           collReport[2] = j;
@@ -217,8 +217,8 @@ public class SoccerSim{
     for (int i = 0; i < numBalls;i++){
         onFieldSum += ballArr[i].onField(FIELD_X_LEN,FIELD_Y_LEN);   //adds 0 if off field, 1 if within field
     }
-    booToReturn = (onFieldSum >= 1);
-    return booToReturn;   //true iff at least one ball on
+    booToReturn = (onFieldSum > 1);
+    return booToReturn;   //true iff at least two ball on
                                 //false iff no balls on field
   }//ends ballsOnField()
 
@@ -271,12 +271,15 @@ public class SoccerSim{
   public Ball getBall(int num){
     return ballArr[num];
   }
+  
+  public void setSecs(double num){
+     totalSeconds = num;
+    }
 
   public static void main(String args[]){
     double[] firstColl = new double [7];
     firstColl[0] = -1.0;    //flag that no coll has been recorded yet
 
-    
     try{
       SoccerSim mySim = new SoccerSim(validateArgs(args));
     }
@@ -288,7 +291,7 @@ public class SoccerSim{
 
     Timer myTimer = new Timer(mySim.getTimeSlice());
 
-    //int exitStrat = 0;
+    int exitStrat = 0;
     System.out.println("Initially there are one to five random poles at:  ");
     for(int i = 0; i < mySim.getNumPoles(); i++){
         System.out.printf("Pole %d is at (%2.1f,%2.1f)\n",i,mySim.getPole(i)[0],mySim.getPole(i)[1]);
@@ -308,23 +311,28 @@ public class SoccerSim{
       }
 
       myTimer.tick();
+      mySim.setSecs(myTimer.getCurrTime());
 
-      //exitStrat++;
-      ////if(exitStrat > 50){
-      //  System.exit(0);
-      //}
+      exitStrat++;
+      if(exitStrat > 10000){
+        System.exit(0);
+      }
       System.out.printf("At time %4.2f:\n",myTimer.getCurrTime());
       System.out.println(mySim.toString());
     }//end main while
 
     //final print
+    System.out.println("Finally, ");
+    System.out.printf("At time %4.2f:\n",myTimer.getCurrTime());
+      System.out.println(mySim.toString());
+      System.out.println("");
     if(firstColl[0] != -1.0 && firstColl[7] == 1.0){
-      System.out.printf("The first collision occured at %4.3f seconds between balls %d and %d. \n",firstColl[0],firstColl[1],firstColl[2]);
-      System.out.printf("Ball %d was at (%4.2f,%4.2f) and ball %d was at (%4.2f,%4.2f).\n",firstColl[1],firstColl[2],firstColl[3],firstColl[4],firstColl[5],firstColl[6]);
+      System.out.printf("The first collision occured at %4.3f seconds between balls %1.0f and %1.0f. \n",firstColl[0],firstColl[1],firstColl[2]);
+      System.out.printf("Ball %1.0f was at (%4.2f,%4.2f) and ball %1.0f was at (%4.2f,%4.2f).\n",firstColl[1],firstColl[3],firstColl[4],firstColl[2],firstColl[5],firstColl[6]);
     }
     else if(firstColl[0] != -1.0 && firstColl[7] == 2.0){
-      System.out.printf("The first collision occured at %4.3f seconds between ball %d and pole %d. \n",firstColl[0],firstColl[1],firstColl[2]);
-      System.out.printf("Ball %d was at (%4.2f,%4.2f) and pole %d was at (%4.2f,%4.2f).\n",firstColl[1],firstColl[2],firstColl[3],firstColl[4],firstColl[5],firstColl[6]);
+      System.out.printf("The first collision occured at %4.3f seconds between ball %1.0f and pole %1.0f. \n",firstColl[0],firstColl[1],firstColl[2]);
+      System.out.printf("Ball %1.0f was at (%4.2f,%4.2f) and pole %1.0f was at (%4.2f,%4.2f).\n",firstColl[1],firstColl[2],firstColl[3],firstColl[4],firstColl[5],firstColl[6]);
     }
     else{
       System.out.println("NO COLLISION POSSIBLE.");
