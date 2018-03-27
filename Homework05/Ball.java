@@ -58,7 +58,9 @@ public class Ball{
   }
 
   public int isMoving(){
-    if(Math.sqrt(Math.pow(xVel,2)+Math.pow(yVel,2)) <= 1.0/12.0){
+    if(Math.sqrt(Math.pow(xVel,2)+Math.pow(yVel,2)) <= 2.0/12.0){
+      xVel = 0.0;
+      yVel = 0.0;
       return 0;
     }
 
@@ -66,7 +68,7 @@ public class Ball{
   }
 
   public static void main(String args[]){
-      Ball myBall = new Ball(Double.parseDouble(args[4]),Double.parseDouble(args[0]),Double.parseDouble(args[1]),Double.parseDouble(args[2]),Double.parseDouble(args[3]));
+      Ball myBall = new Ball(Double.parseDouble(args[0]),Double.parseDouble(args[1]),Double.parseDouble(args[2]),Double.parseDouble(args[3]),Double.parseDouble(args[4]));
       //Ball myBall = new Ball(1,200,50,150,100); 
       System.out.println(myBall.myToString()[0]);
       System.out.println(myBall.myToString()[1]);
