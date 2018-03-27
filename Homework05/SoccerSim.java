@@ -30,12 +30,12 @@ public class SoccerSim{
     timeSlice = Double.parseDouble(inputArgs[inputArgs.length-1]);
 
     //creates a random number of poles in random spots
-    numPoles = (int)(Math.random()*MAX_POLES);
+    numPoles = (int)(1+Math.random()*(MAX_POLES-1));
     polesX = new double[numPoles];
     polesY = new double[numPoles];
     for (int i = 0; i < numPoles; i++){
-      polesX[i] = (Math.random()*FIELD_X_LEN -FIELD_X_LEN/2);
-      polesY[i] = (Math.random()*FIELD_Y_LEN -FIELD_Y_LEN/2);
+      polesX[i] = (Math.random()*FIELD_X_LEN -0.5*FIELD_X_LEN);
+      polesY[i] = (Math.random()*FIELD_Y_LEN -0.5*FIELD_Y_LEN);
     }
 
     //creating ball array
@@ -47,7 +47,7 @@ public class SoccerSim{
   }
 
   private static String[] validateArgs(String inputArgs[]) throws IllegalArgumentException {
-    String[] strMatToReturn;
+    String[] strMatToReturn = new String[4*(inputArgs.length/4) +1];   
 
 
     if (inputArgs.length == 0){   //checks there are arguments
@@ -58,7 +58,7 @@ public class SoccerSim{
     }
 
     if (inputArgs.length % 4 == 0){  //no timeSlice
-      for (int i = 0; i < inputArgs.length; i += 2){
+      for (int i = 0; i < inputArgs.length-3; i += 4){
         try{
           valiPosArgs(inputArgs[i],inputArgs[i+1]);
           valiVelArgs(inputArgs[i+2],inputArgs[i+3]);
@@ -69,15 +69,11 @@ public class SoccerSim{
         }
       }
 
-      strMatToReturn = new String[inputArgs.length + 1];
-      for(int i =0;i<inputArgs.length-1;i++){
-        strMatToReturn[i] = inputArgs[i];
-      }
-      strMatToReturn[inputArgs.length] = DEFAULT_TIME_SLICE;
+      strMatToReturn[strMatToReturn.length - 1] = DEFAULT_TIME_SLICE;
 
     }
     else if (inputArgs.length % 4 == 1){  //timeSlice entered
-      for (int i = 0; i < inputArgs.length - 1; i += 2){
+      for (int i = 0; i < inputArgs.length - 3; i += 4){
         try{
           valiPosArgs(inputArgs[i],inputArgs[i+1]);
           valiVelArgs(inputArgs[i+2],inputArgs[i+3]);
@@ -95,9 +91,16 @@ public class SoccerSim{
         System.out.println(iae.toString());
         System.exit(1);
       }
+      
+      strMatToReturn[strMatToReturn.length -1]=inputArgs[inputArgs.length-1];
     }
 
-    return inputArgs;  //will only return if no exceptions are thrown
+    
+    for(int i =0;i<inputArgs.length;i++){
+        strMatToReturn[i] = inputArgs[i];
+      }
+      
+    return strMatToReturn;  //will only return if no exceptions are thrown
   }
 
   private static String valiTimeSliceArg(String timeSliceArg) throws IllegalArgumentException{
@@ -132,7 +135,7 @@ public class SoccerSim{
       System.exit(2);
     }
 
-    if (dblXPos<= -(FIELD_X_LEN/2) || dblYPos <= -(FIELD_Y_LEN/2) || dblXPos > (FIELD_X_LEN/2) || dblYPos > (FIELD_Y_LEN/2) ){
+    if (dblXPos<= (-.5*FIELD_X_LEN) || dblYPos <= (-.5*FIELD_Y_LEN) || dblXPos >= (FIELD_X_LEN*.5) || dblYPos >= (FIELD_Y_LEN*.5) ){
       throw new IllegalArgumentException("Enter valid position values");
     }
 
@@ -214,19 +217,21 @@ public class SoccerSim{
     for (int i = 0; i < numBalls;i++){
         onFieldSum += ballArr[i].onField(FIELD_X_LEN,FIELD_Y_LEN);   //adds 0 if off field, 1 if within field
     }
-
-    return (onFieldSum != 0);   //true iff at least one ball on
+    booToReturn = (onFieldSum >= 1);
+    return booToReturn;   //true iff at least one ball on
                                 //false iff no balls on field
   }//ends ballsOnField()
 
   private boolean ballsMoving(){
+    boolean booToReturn = true;
     int ballsMovingSum = 0;
 
     for (int i = 0; i < numBalls; i++){
-      ballsMovingSum += ballArr[i].isMoving();
+      ballsMovingSum += ballArr[i].isMoving();   //returns 1 if moving
     }
 
-    return (ballsMovingSum != 0);
+    booToReturn = (ballsMovingSum >= 1);
+    return booToReturn;
   }
 
   public String toString(){
@@ -248,10 +253,30 @@ public class SoccerSim{
     return timeSlice;
   }
 
+  public int getNumBalls(){
+    return numBalls;
+  }
+  
+  public int getNumPoles(){
+     return numPoles; 
+    }
+    
+  public double[] getPole(int num){
+      double[] arrToReturn = new double[2];
+      arrToReturn[0] = polesX[num];
+      arrToReturn[1] = polesY[num];
+      return arrToReturn;
+    }
+
+  public Ball getBall(int num){
+    return ballArr[num];
+  }
+
   public static void main(String args[]){
     double[] firstColl = new double [7];
     firstColl[0] = -1.0;    //flag that no coll has been recorded yet
 
+    
     try{
       SoccerSim mySim = new SoccerSim(validateArgs(args));
     }
@@ -259,19 +284,37 @@ public class SoccerSim{
       System.out.println(iae.toString());
       System.exit(1);
     }
-
     SoccerSim mySim = new SoccerSim(validateArgs(args));
 
     Timer myTimer = new Timer(mySim.getTimeSlice());
 
+    //int exitStrat = 0;
+    System.out.println("Initially there are one to five random poles at:  ");
+    for(int i = 0; i < mySim.getNumPoles(); i++){
+        System.out.printf("Pole %d is at (%2.1f,%2.1f)\n",i,mySim.getPole(i)[0],mySim.getPole(i)[1]);
+    }
+    System.out.println(mySim.toString());
+    
     while (mySim.ballsOnField() && mySim.ballsMoving()){
-      System.out.println(mySim.toString());
+      
 
       if (mySim.collisionDetect()[0] != -1){
         firstColl = mySim.collisionDetect();
       }
 
+      for(int i = 0; i < mySim.getNumBalls();i++){
+        mySim.getBall(i).reCalcVels();
+        mySim.getBall(i).move();
+      }
+
       myTimer.tick();
+
+      //exitStrat++;
+      ////if(exitStrat > 50){
+      //  System.exit(0);
+      //}
+      System.out.printf("At time %4.2f:\n",myTimer.getCurrTime());
+      System.out.println(mySim.toString());
     }//end main while
 
     //final print
