@@ -57,8 +57,6 @@ public class BrobInt {
    *  @param  value  String value to make into a BrobInt
    */
    public BrobInt( String valueArg ) {
-      super();
-
       try{
           validateDigits(valueArg);
       }
@@ -68,11 +66,11 @@ public class BrobInt {
           System.exit(1);
       }
 
-      if(valueArg.charAt(0) == "-"){
+      if(valueArg.charAt(0) == '-'){
           isPositive = false;
           internalValue = new String(valueArg.subString(1,valueArg.length()-1));
       }
-      else if(valueArg.charAt(0) == "+") {
+      else if(valueArg.charAt(0) == '+') {
           isPositive = true;
           internalValue = new String(valueArg.subString(1,valueArg.length()-1));
       }
@@ -87,6 +85,23 @@ public class BrobInt {
 
    }
 
+   /**
+    *  Constructor takes a string and assigns it to the internal storage, checks for a sign character
+    *   and handles that accordingly;  it then checks to see if it's all valid digits, and reverses it
+    *   for later use
+    *  @param  value  String value to make into a BrobInt
+    */
+    public BrobInt( BrobInt brobArg, boolean isPosArg) {
+       StringBuilder tempStr = new StringBuilder();
+//NOT DONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+       byteVersion = brobArg.getByteArr();
+
+
+
+       reversed = new String(reverser(internalValue));
+
+    }
+
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to validate that all the characters in the value are valid decimal digits
    *  @return  boolean  true if all digits are good
@@ -94,12 +109,12 @@ public class BrobInt {
    *  note that there is no return false, because of throwing the exception
    *  note also that this must check for the '+' and '-' sign digits
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-   public boolean validateDigits(String strArg) throws IllegalArgumentException {
+   public void validateDigits(String strArg) throws IllegalArgumentException {
 
        if(strArg.charAt(0) == "+" || strArg.charAt(0) == "-"){
           for(int i =1;i<strArg.length;i++){
               try{
-                  Integer.parseInt(strArg.charAt(i));
+                  Integer.parseInt(strArg.substring(i,i+1));
               }
               catch(NumberFormatException nfe){
                   throw new IllegalArgumentException("Non-number inputs.");
@@ -109,15 +124,13 @@ public class BrobInt {
       else{
           for(int i =0;i<strArg.length;i++){
               try{
-                  Integer.parseInt(strArg.charAt(i));
+                  Integer.parseInt(strArg.substring(i,i+1));
               }
               catch(NumberFormatException nfe){
                   throw new IllegalArgumentException("Non-number inputs.");
               }
           }
       }
-
-      return true;
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -125,7 +138,15 @@ public class BrobInt {
    *  @return BrobInt that is the reverse of the value of this BrobInt
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt reverser() {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+      StringBuffer strForBrob = new StringBuffer();
+      if(isPositive){
+          strForBrob.append("+");
+      }
+      else{
+          strForBrob.append("-");
+      }
+      strForBrob.append(this.reverser(internalValue));
+      return (new BrobInt(strForBrob.toString()));
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -135,8 +156,7 @@ public class BrobInt {
    *  @return BrobInt that is the reverse of the value of the BrobInt passed as argument
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public static BrobInt reverser( BrobInt gint ) {
-       //print old string as well as new (reversed) string
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+       return gint.reverser();
    }
 
    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -146,13 +166,8 @@ public class BrobInt {
     *  @return String that is the reverse of the value of the String passed as argument
     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public static String reverser(String strArg){
-       StringBuilder strToReturn = new StringBuilder();
+       return new String( new StringBuffer( strArg ).reverse() );
 
-       for(int i =strArg.length()-1;i>=0;i--){
-           strToReturn.append(strArg.charAt(i));
-       }
-
-       return strToReturn.toString();
    }
 
    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -181,23 +196,70 @@ public class BrobInt {
    *  @return BrobInt that is the sum of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt addByte( BrobInt gint ) {
-       StringBuilder strForBrob = new StringBuilder();
+       String strForBrob;
+       boolean finalPositive;
+
+       if(this.compareTo(gint) >= 0){ //this>arg
+           if(isPositive && gint.getPositive()){
+               strForBrob = addHelper(byteVersion,gint.getByteArr());
+               finalPositive = true;
+           }
+           else if(isPositive && !(gint.getPositive())){
+               strForBrob = subHelper(byteVersion,gint.getByteArr());
+               finalPositive = true;
+           }
+           else if(!(isPositive) && gint.getPositive()){
+               strForBrob = subHelper(byteVersion,gint.getByteArr());
+               finalPositive = false;
+           }
+           else{
+               strForBrob = addHelper(byteVersion,gint.getByteArr());
+               finalPositive = false;
+           }
+       }
+       else if (this.compareTo(gint) < 0){ //arg>this
+           if(isPositive && gint.getPositive()){
+               strForBrob = addHelper(byteVersion,gint.getByteArr());
+               finalPositive = true;
+           }
+           else if(isPositive && !(gint.getPositive())){
+               strForBrob = subHelper(gint.getByteArr(),byteVersion);
+               finalPositive = false;
+           }
+           else if(!(isPositive) && gint.getPositive()){
+               strForBrob = subHelper(gint.getByteArr(),byteVersion);
+               finalPositive = true;
+           }
+           else{
+               strForBrob = addHelper(byteVersion,gint.getByteArr());
+               finalPositive = false;
+           }
+       }
+
+       StringBuilder tempBuild = new StringBuilder();
+       if(finalPositive){
+           tempBuild.append("+");
+       }
+       else{
+           tempBuild.append("-");
+       }
+       tempBuild.append(strForBrob);
+
+       return new BrobInt(tempBuild.toString());
+
+   }
+
+   public String addHelper(byte[] bArrOne, byte[] bArrTwo){
        boolean carry = false;
-       int holder = 0;
+       StringBuilder strForBrob = new StringBuilder();
 
-       //handle neg input as subtraction
-       //if arg is neg, call subtract w switched pos value of this ^^
-       //if that ends up being a neg minus a pos, subtraction vwill call add with a switched
-
-       for(int i = 0; i<byteVersion.length && i<gint.getByteArr().length;i++){
-
-
-           holder = (int)byteVersion[i] + (int)gint.getByteArr()[i];
+       for(int i = 0; i<bArrTwo.length;i++){
+           holder = (int)bArrOne[i] + (int)bArrTwo[i];
            if(carry){
                holder+=1;
            }
 
-            if(holder>127){
+            if(holder>=100){
                 carry = true;
                 holder-=100;
                 strForBrob.append(holder);
@@ -206,12 +268,12 @@ public class BrobInt {
                 strForBrob.append(holder);
                 carry = false;
             }
-
-
-
+       }
+       for(int i = bArrTwo.length; i<bArrOne.length;i++){
+           strForBrob.append(bArrOne[i]);
        }
 
-      return new BrobInt(strForBrob.toString());
+       return strForBrob.toString();
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -229,7 +291,56 @@ public class BrobInt {
    *  @return BrobInt that is the difference of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt subtractByte( BrobInt gint ) {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+       String strForBrob;
+       boolean finalPositive;
+
+       if(this.compareTo(gint) >= 0){ //this>arg
+           if(isPositive && gint.getPositive()){
+               strForBrob = subHelper(byteVersion,gint.getByteArr());
+               finalPositive = true;
+           }
+           else if(isPositive && !(gint.getPositive())){
+               strForBrob = addHelper(byteVersion,gint.getByteArr());
+               finalPositive = true;
+           }
+           else if(!(isPositive) && gint.getPositive()){
+               strForBrob = addHelper(byteVersion,gint.getByteArr());
+               finalPositive = false;
+           }
+           else{
+               strForBrob = subHelper(byteVersion,gint.getByteArr());
+               finalPositive = false;
+           }
+       }
+       else if (this.compareTo(gint) < 0){ //arg>this
+           if(isPositive && gint.getPositive()){
+               strForBrob = subHelper(gint.getByteArr(),byteVersion);
+               finalPositive = false;
+           }
+           else if(isPositive && !(gint.getPositive())){
+               strForBrob = addHelper(gint.getByteArr(),byteVersion);
+               finalPositive = true;
+           }
+           else if(!(isPositive) && gint.getPositive()){
+               strForBrob = addHelper(gint.getByteArr(),byteVersion);
+               finalPositive = false;
+           }
+           else{
+               strForBrob = subHelper(gint.getByteArr(),byteVersion);
+               finalPositive = true;
+           }
+       }
+
+       StringBuilder tempBuild = new StringBuilder();
+       if(finalPositive){
+           tempBuild.append("+");
+       }
+       else{
+           tempBuild.append("-");
+       }
+       tempBuild.append(strForBrob);
+
+       return new BrobInt(tempBuild.toString());
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -240,6 +351,34 @@ public class BrobInt {
    public BrobInt subtractInt( BrobInt gint ) {
       throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
    }
+
+   public String subHelper(byte[] bArrOne, byte[] bArrTwo){
+       boolean carry = false;
+       StringBuilder strForBrob = new StringBuilder();
+
+       for(int i = 0; i<bArrTwo.length;i++){
+           holder = (int)bArrOne[i] - (int)bArrTwo[i];
+           if(carry){
+               holder-=1;
+           }
+
+            if(holder<0){
+                carry = true;
+                holder+=100;
+                strForBrob.append(holder);
+            }
+            else{
+                strForBrob.append(holder);
+                carry = false;
+            }
+       }
+       for(int i = bArrTwo.length; i<bArrOne.length;i++){
+           strForBrob.append(bArrOne[i]);
+       }
+
+       return strForBrob.toString();
+   }
+
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to multiply the value of a BrobIntk passed as argument to this BrobInt
@@ -276,7 +415,25 @@ public class BrobInt {
    *        THAT was easy.....
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public int compareTo( BrobInt gint ) {
-      return (internalValue.compareTo( gint.toString() ));
+      if(this.toString().length() > gint.toString().length()){
+          return 1;
+      }
+      else if(this.toString().length() < gint.toString().length()){
+          return -1;
+      }
+      else if(this.toString().charAt(0)== '-' && gint.toString().charAt(0) == '-'){
+          return (this.toString().compareTo( gint.toString() ));
+      }
+      else if(this.toString().charAt(0)== '-' && gint.toString().charAt(0) == '+'){
+          return -1;
+      }
+      else if(this.toString().charAt(0)== '+' && gint.toString().charAt(0) == '-'){
+          return 1;
+      }
+      else{
+          return (this.toString().compareTo( gint.toString() ));
+      }
+
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -287,7 +444,7 @@ public class BrobInt {
    *        also using the java String "equals()" method -- THAT was easy, too..........
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public boolean equals( BrobInt gint ) {
-      return (internalValue.equals( gint.toString() ));
+      return (this.toString().equals( gint.toString() ));
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -351,6 +508,11 @@ public class BrobInt {
    public void toArray( byte[] d ) {
       System.out.println( Arrays.toString( d ) );
    }
+/**
+   public void changeSign(boolean toPosArg){
+       isPositive = toPosArg;
+   }
+   */
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  the main method redirects the user to the test class
