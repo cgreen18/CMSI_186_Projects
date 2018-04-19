@@ -236,6 +236,8 @@ public class BrobInt {
            }
        }
 
+
+
        StringBuilder tempBuild = new StringBuilder();
        if(finalPositive){
            tempBuild.append("+");
@@ -243,7 +245,7 @@ public class BrobInt {
        else{
            tempBuild.append("-");
        }
-       tempBuild.append(strForBrob);
+       tempBuild.append(this.trimStr(strForBrob));
 
        return new BrobInt(tempBuild.toString());
 
@@ -338,7 +340,7 @@ public class BrobInt {
        else{
            tempBuild.append("-");
        }
-       tempBuild.append(strForBrob);
+       tempBuild.append(this.trimStr(strForBrob));
 
        return new BrobInt(tempBuild.toString());
    }
@@ -386,8 +388,32 @@ public class BrobInt {
    *  @return BrobInt that is the product of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt multiply( BrobInt gint ) {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+       byte[] bArrForBrob = new byte[gint.getByteArr().length+byteVersion.length +1];
+       boolean finalPositive = !(gint.getPositive() ^ isPositive);
+       BrobInt outBrob = new BrobInt("0");
+       BrobInt brobOne = new BrobInt(internalValue);
+       BrobInt brobTwo = new BrobInt(gint.toString().substring(1));
+
+       while(!(brobTwo.compareTo(ONE) && brobTwo.getByteArr()[brobTwo.getByteArr().length] == 1)){
+           if(brobTwo.remainder(TWO) == 1){
+               outBrob = outBrob.addByte(brobOne);
+           }
+
+           brobOne = brobOne.multiply(TWO);
+           brobTwo = brobTwo.divide(TWO);
+
+       }
+
+       outBrob = outBrob.addByte(brobOne);
+
+       return outBrob;
+
+
    }
+
+
+
+
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to divide the value of this BrobIntk by the BrobInt passed as argument
@@ -475,7 +501,7 @@ public class BrobInt {
     *  Method to return a private variable isPositive
     *  @return boolean isPositive
     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-   public static boolean getPositive(){
+   public boolean getPositive(){
        return isPositive;
    }
 
@@ -486,10 +512,6 @@ public class BrobInt {
    public String toString() {
       StringBuilder strToReturn = new StringBuilder();
 
-      for( int i = 0; i < byteVersion.length; i++ ) {
-          strToReturn.append(byteVersion[i]);
-      }
-
       if(isPositive){
           strToReturn.append("+");
       }
@@ -497,9 +519,48 @@ public class BrobInt {
           strToReturn.append("-");
       }
 
+      for( int i = 0; i < byteVersion.length; i++ ) {
+          strToReturn.append(byteVersion[i]);
+      }
+
+
+
 
 
       return strToReturn.toString();
+   }
+
+   private byte[] trimByteArr(byte[] byteArg){
+       int locat = 0;
+
+       for(int i = byteArg.length - 1; i >= 0;i--){
+           if(byteArg[i]!=0){
+               locat = i;
+               break;
+           }
+       }
+
+       byte[] byteOut = new byte[byteArg.length-locat];
+
+       for(int i = 0; i < byteOut.length;i++ ){
+           byteOut[i] = byteArg[i+locat];
+       }
+
+       return byteOut;
+   }
+
+   private String trimStr(String strArg){
+       byte[] byStr = this.strToByte(strArg);
+
+       byStr = this.trimByteArr(byStr);
+
+       StringBuilder strOut = new StringBuilder();
+
+       for(int i = 0; byStr.length; i++){
+           strOut.append(byStr[i]);
+       }
+
+       return byStr.toString();
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
