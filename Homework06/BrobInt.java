@@ -268,7 +268,7 @@ public class BrobInt {
        StringBuilder strForBrob = new StringBuilder();
        int holder;
 
-       for(int i = 0; i<bArrTwo.length;i++){
+       for(int i = bArrTwo.length -1; i>=0 ;i--){
            holder = (int)bArrOne[i] + (int)bArrTwo[i];
            if(carry){
                holder+=1;
@@ -277,18 +277,18 @@ public class BrobInt {
             if(holder>=100){
                 carry = true;
                 holder-=100;
-                strForBrob.append(holder);
+                strForBrob.insert(0,holder);
             }
             else{
-                strForBrob.append(holder);
+                strForBrob.insert(0,holder);
                 carry = false;
             }
        }
        for(int i = bArrTwo.length; i<bArrOne.length;i++){
-           strForBrob.append(bArrOne[i]);
+           strForBrob.insert(0,bArrOne[i]);
        }
 
-       return strForBrob.toString();
+       return this.reverser(strForBrob.toString());
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -381,15 +381,15 @@ public class BrobInt {
             if(holder<0){
                 carry = true;
                 holder+=100;
-                strForBrob.append(holder);
+                strForBrob.insert(0,holder);
             }
             else{
-                strForBrob.append(holder);
+                strForBrob.insert(0,holder);
                 carry = false;
             }
        }
        for(int i = bArrTwo.length; i<bArrOne.length;i++){
-           strForBrob.append(bArrOne[i]);
+           strForBrob.insert(0,bArrOne[i]);
        }
 
        return strForBrob.toString();
