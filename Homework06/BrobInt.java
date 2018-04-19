@@ -23,6 +23,7 @@ import java.util.Arrays;
 
 public class BrobInt {
 
+   public static final BrobInt NEGONE  = new BrobInt("-1");
    public static final BrobInt ZERO     = new BrobInt(  "0" );      /// Constant for "zero"
    public static final BrobInt ONE      = new BrobInt(  "1" );      /// Constant for "one"
    public static final BrobInt TWO      = new BrobInt(  "2" );      /// Constant for "two"
@@ -68,15 +69,15 @@ public class BrobInt {
 
       if(valueArg.charAt(0) == '-'){
           isPositive = false;
-          internalValue = new String(valueArg.subString(1,valueArg.length()-1));
+          internalValue = new String(valueArg.substring(1,valueArg.length()-1));
       }
       else if(valueArg.charAt(0) == '+') {
           isPositive = true;
-          internalValue = new String(valueArg.subString(1,valueArg.length()-1));
+          internalValue = new String(valueArg.substring(1,valueArg.length()-1));
       }
       else{
           isPositive = true;
-          internalValue = new String(valueArg.subString(0,valueArg.length()-1));
+          internalValue = new String(valueArg.substring(0,valueArg.length()-1));
       }
 
       byteVersion = strToByte(internalValue);
@@ -111,8 +112,8 @@ public class BrobInt {
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public void validateDigits(String strArg) throws IllegalArgumentException {
 
-       if(strArg.charAt(0) == "+" || strArg.charAt(0) == "-"){
-          for(int i =1;i<strArg.length;i++){
+       if(strArg.charAt(0) == '+' || strArg.charAt(0) == '-'){
+          for(int i =1;i<strArg.length();i++){
               try{
                   Integer.parseInt(strArg.substring(i,i+1));
               }
@@ -122,7 +123,7 @@ public class BrobInt {
           }
       }//ends if
       else{
-          for(int i =0;i<strArg.length;i++){
+          for(int i =0;i<strArg.length();i++){
               try{
                   Integer.parseInt(strArg.substring(i,i+1));
               }
@@ -196,8 +197,8 @@ public class BrobInt {
    *  @return BrobInt that is the sum of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt addByte( BrobInt gint ) {
-       String strForBrob;
-       boolean finalPositive;
+       String strForBrob = new String("");
+       boolean finalPositive = true;
 
        if(this.compareTo(gint) >= 0){ //this>arg
            if(isPositive && gint.getPositive()){
@@ -254,6 +255,7 @@ public class BrobInt {
    public String addHelper(byte[] bArrOne, byte[] bArrTwo){
        boolean carry = false;
        StringBuilder strForBrob = new StringBuilder();
+       int holder;
 
        for(int i = 0; i<bArrTwo.length;i++){
            holder = (int)bArrOne[i] + (int)bArrTwo[i];
@@ -293,8 +295,8 @@ public class BrobInt {
    *  @return BrobInt that is the difference of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt subtractByte( BrobInt gint ) {
-       String strForBrob;
-       boolean finalPositive;
+       String strForBrob = new String("");
+       boolean finalPositive = true;
 
        if(this.compareTo(gint) >= 0){ //this>arg
            if(isPositive && gint.getPositive()){
@@ -357,6 +359,7 @@ public class BrobInt {
    public String subHelper(byte[] bArrOne, byte[] bArrTwo){
        boolean carry = false;
        StringBuilder strForBrob = new StringBuilder();
+       int holder;
 
        for(int i = 0; i<bArrTwo.length;i++){
            holder = (int)bArrOne[i] - (int)bArrTwo[i];
@@ -389,39 +392,59 @@ public class BrobInt {
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt multiply( BrobInt gint ) {
        byte[] bArrForBrob = new byte[gint.getByteArr().length+byteVersion.length +1];
-       boolean finalPositive = !(gint.getPositive() ^ isPositive);
+       //boolean finalPositive = !(gint.getPositive() ^ isPositive);
        BrobInt outBrob = new BrobInt("0");
        BrobInt brobOne = new BrobInt(internalValue);
        BrobInt brobTwo = new BrobInt(gint.toString().substring(1));
 
-       while(!(brobTwo.compareTo(ONE) && brobTwo.getByteArr()[brobTwo.getByteArr().length] == 1)){
-           if(brobTwo.remainder(TWO) == 1){
+       while(!((brobTwo.compareTo(ONE) == 0 || brobTwo.compareTo(NEGONE)  == 0) && brobTwo.getByteArr()[brobTwo.getByteArr().length] == 1)){
+           if(brobTwo.remainder(TWO) == ONE || brobTwo.remainder(TWO) == NEGONE){
                outBrob = outBrob.addByte(brobOne);
            }
-
            brobOne = brobOne.multiply(TWO);
            brobTwo = brobTwo.divide(TWO);
-
        }
 
        outBrob = outBrob.addByte(brobOne);
 
        return outBrob;
-
-
    }
-
-
-
-
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to divide the value of this BrobIntk by the BrobInt passed as argument
    *  @param  gint         BrobInt to divide this by
    *  @return BrobInt that is the dividend of this BrobInt divided by the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-   public BrobInt divide( BrobInt gint ) throws ArithmeticException {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+   public BrobInt divide( BrobInt gint ) throws ArithmeticException {//this/arg
+      BrobInt brobToReturn = new BrobInt("0");
+      String temp;
+      BrobInt holder = new BrobInt("0");
+      BrobInt currOut = new BrobInt("0");
+
+      if(gint.compareTo(TWO) == 0){
+          throw new ArithmeticException("Cannot divide by zero");
+      }
+      else if(this.compareTo(gint) < 0 ){
+          return ZERO;
+      }
+
+      for(int i =0; i < gint.toString().substring(1).length(); i++){
+          holder = this.multiply(currOut);
+          temp = gint.toString().substring(2*i+1,2*(i+1)+1);
+          temp = holder.toString().substring(1).concat(temp);
+          holder = new BrobInt(temp);
+          currOut = holder.divide(gint);
+          if(currOut.compareTo(TEN) < 0){
+              brobToReturn = new BrobInt(brobToReturn.toString().concat("0"));
+              brobToReturn = new BrobInt(brobToReturn.toString().concat(currOut.toString().substring(0)));
+          }
+          else{
+              brobToReturn = new BrobInt(brobToReturn.toString().concat(currOut.toString().substring(0)));
+          }
+      }
+
+      return brobToReturn;
+
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -430,13 +453,13 @@ public class BrobInt {
    *  @return BrobInt that is the remainder of division of this BrobInt by the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt remainder( BrobInt gint ) {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+       return this.subtractByte(gint.multiply(this.divide(gint)));
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to compare a BrobInt passed as argument to this BrobInt
    *  @param  gint  BrobInt to add to this
-   *  @return int   that is one of neg/0/pos if this BrobInt precedes/equals/follows the argument
+   *  @return int   that is one of neg/0/pos if this BrobInt lower/equals/greater the argument
    *  NOTE: this method performs a lexicographical comparison using the java String "compareTo()" method
    *        THAT was easy.....
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -493,7 +516,7 @@ public class BrobInt {
     *  Method to return a private variable btyeVersion
     *  @return byte[] byteVersion
     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-   public static byte[] getByteArr(){
+   public byte[] getByteArr(){
        return byteVersion;
    }
 
@@ -556,7 +579,7 @@ public class BrobInt {
 
        StringBuilder strOut = new StringBuilder();
 
-       for(int i = 0; byStr.length; i++){
+       for(int i = 0; i < byStr.length; i++){
            strOut.append(byStr[i]);
        }
 
