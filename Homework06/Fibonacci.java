@@ -27,7 +27,7 @@ public class Fibonacci{
 
         brobIntArr = new BrobInt[target+1];
         brobIntArr[0] = new BrobInt("1");
-        brobIntArr[1] = new BrobInt("2");
+        brobIntArr[1] = new BrobInt("1");
 
         for(int i = 2; i <=target ; i++){
             brobIntArr[i]=calcValue(i);
