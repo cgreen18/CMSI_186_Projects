@@ -70,15 +70,15 @@ public class BrobInt {
 
       if(valueArg.charAt(0) == '-'){
           isPositive = false;
-          internalValue = new String(valueArg.substring(1,valueArg.length()-1));
+          internalValue = new String(valueArg.substring(1));
       }
       else if(valueArg.charAt(0) == '+') {
           isPositive = true;
-          internalValue = new String(valueArg.substring(1,valueArg.length()-1));
+          internalValue = new String(valueArg.substring(1));
       }
       else{
           isPositive = true;
-          internalValue = new String(valueArg.substring(0,valueArg.length()-1));
+          internalValue = new String(valueArg.substring(0));
       }
 
       byteVersion = strToByte(internalValue);
@@ -175,15 +175,29 @@ public class BrobInt {
     *  @return byte[]  byte array with each element being 2 digits of string and final value is last digit (if odd)
     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public static byte[] strToByte(String strArg){
+      //int buff = 0;
+      // if(strArg.charAt(0)=='+'||strArg.charAt(0)=='-'){
+        //int buff = 1;
+       //}
        byte[] byteArrToReturn = new byte[(strArg.length()/2)+(strArg.length()%2)];  //half size (plus 1 if odd size)
+       int modder = strArg.length()%2;
+       
+       if(modder == 1){
+          byteArrToReturn[0] = Byte.parseByte(strArg.substring(0,1));
+       }
+       else{
+           byteArrToReturn[0]=Byte.parseByte(strArg.substring(0,2));
+       }
 
-        for(int i =0; i< 2*(strArg.length()/2)-1; i+=2){
-            byteArrToReturn[i/2] = Byte.parseByte(strArg.substring(i,i+2));
+        for(int i =1; i<byteArrToReturn.length-1; i+=1){
+            byteArrToReturn[i] = Byte.parseByte(strArg.substring(2*i-modder,2*(i+1)-modder    ));
         }
-
-        if(strArg.length()%2 == 1){
-            byteArrToReturn[byteArrToReturn.length-1] = Byte.parseByte(strArg.substring(strArg.length()-1));
+        if(strArg.length()>=2){
+            byteArrToReturn[byteArrToReturn.length-1] = Byte.parseByte(strArg.substring(strArg.length()-2));
         }
+        //if(strArg.length()%2 == 1){
+        //    byteArrToReturn[byteArrToReturn.length-1] = Byte.parseByte(strArg.substring(strArg.length()-1));
+        //}
 
        return byteArrToReturn;
    }
@@ -381,7 +395,6 @@ public class BrobInt {
        return strForBrob.toString();
    }
 
-
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to multiply the value of a BrobIntk passed as argument to this BrobInt
    *  @param  gint         BrobInt to multiply by this
@@ -548,10 +561,6 @@ public class BrobInt {
           strToReturn.append(byteVersion[i]);
       }
 
-
-
-
-
       return strToReturn.toString();
    }
 
@@ -594,11 +603,7 @@ public class BrobInt {
    public void toArray( byte[] d ) {
       System.out.println( Arrays.toString( d ) );
    }
-/**
-   public void changeSign(boolean toPosArg){
-       isPositive = toPosArg;
-   }
-   */
+
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  the main method redirects the user to the test class
