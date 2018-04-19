@@ -284,6 +284,9 @@ public class BrobInt {
                 carry = false;
             }
        }
+       if(carry){
+           strForBrob.insert(0,1);
+        }
        for(int i = bArrTwo.length; i<bArrOne.length;i++){
            strForBrob.insert(0,bArrOne[i]);
        }
