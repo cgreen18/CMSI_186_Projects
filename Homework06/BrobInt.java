@@ -18,6 +18,7 @@
  *                                     and compareTo methods to use the Java String methods; ready to
  *                                     start work on subtractByte and subtractInt methods
  *  1.2.0   4/6/18  Conor Green     Wrote the basic constructor, toString, and other basic methods
+ *  1.3.0   4/18/18 Conor Green     Compilable. All methods written
  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 import java.util.Arrays;
 
@@ -93,14 +94,10 @@ public class BrobInt {
     *  @param  value  String value to make into a BrobInt
     */
     public BrobInt( BrobInt brobArg, boolean isPosArg) {
-       StringBuilder tempStr = new StringBuilder();
-//NOT DONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+       internalValue = new String(brobArg.toString().substring(1));
+       isPositive = isPosArg;
        byteVersion = brobArg.getByteArr();
-
-
-
        reversed = new String(reverser(internalValue));
-
     }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -441,6 +438,11 @@ public class BrobInt {
           else{
               brobToReturn = new BrobInt(brobToReturn.toString().concat(currOut.toString().substring(0)));
           }
+      }
+
+      if(!(isPositive)){
+          String a = new String("-");
+          brobToReturn = new BrobInt(a.concat(brobToReturn.toString().substring(1)));
       }
 
       return brobToReturn;
