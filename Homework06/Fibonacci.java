@@ -1,9 +1,18 @@
 public class Fibonacci{
 
-    private BrobInt[] brobIntArr;
-
+    private static BrobInt[] brobIntArr;
+    private static int target;
+    
+    
     public static void main(String[] args){
-        int target = Integer.parseInt(args[0]);
+        try{
+            
+            target = Integer.parseInt(args[0]);
+        }
+        catch(NumberFormatException nfe){
+            System.out.println(nfe.toString());
+            System.exit(1);
+        }
 
         if(target == 0){
             System.out.println("Zeroth value of the Fibonacci series is trivial.");
@@ -12,23 +21,23 @@ public class Fibonacci{
         }
         else if(target == 1 || target == 2){
             System.out.println("First and second values of the Fibonacci series are trivial.");
-            System.out.println("It is: 1");
+            System.out.println("They are: 1");
             System.exit(2);
         }
 
-        brobIntArr = new BrobInt[target];
+        brobIntArr = new BrobInt[target+1];
         brobIntArr[0] = new BrobInt("1");
         brobIntArr[1] = new BrobInt("2");
 
         for(int i = 2; i <=target ; i++){
-            calcValue(i);
+            brobIntArr[i]=calcValue(i);
         }
 
         System.out.printf("The %d(th) value in the Fibonacci sequence is: \n",target);
-        System.out.println(brobIntArr[target].toString());
+        System.out.println(brobIntArr[target-2].toString());
     }
 
-    public BrobInt calcValue(int indexArg){
+    public static BrobInt calcValue(int indexArg){
         return (brobIntArr[indexArg-1].addByte(brobIntArr[indexArg-2]));
     }
 
