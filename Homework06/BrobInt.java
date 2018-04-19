@@ -248,7 +248,7 @@ public class BrobInt {
            }
        }
 
-
+  
 
        StringBuilder tempBuild = new StringBuilder();
        if(finalPositive){
@@ -372,7 +372,7 @@ public class BrobInt {
        StringBuilder strForBrob = new StringBuilder();
        int holder;
 
-       for(int i = 0; i<bArrTwo.length;i++){
+       for(int i = bArrTwo.length-1;i>=0;i--){
            holder = (int)bArrOne[i] - (int)bArrTwo[i];
            if(carry){
                holder-=1;
