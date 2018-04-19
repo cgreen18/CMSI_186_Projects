@@ -257,7 +257,7 @@ public class BrobInt {
        else{
            tempBuild.append("-");
        }
-       tempBuild.append(this.trimStr(strForBrob));
+       tempBuild.append(strForBrob);
 
        return new BrobInt(tempBuild.toString());
 
@@ -288,7 +288,7 @@ public class BrobInt {
            strForBrob.insert(0,bArrOne[i]);
        }
 
-       return this.reverser(strForBrob.toString());
+       return strForBrob.toString();
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -353,7 +353,7 @@ public class BrobInt {
        else{
            tempBuild.append("-");
        }
-       tempBuild.append(this.trimStr(strForBrob));
+       tempBuild.append(strForBrob);
 
        return new BrobInt(tempBuild.toString());
    }
