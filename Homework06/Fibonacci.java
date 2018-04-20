@@ -34,7 +34,7 @@ public class Fibonacci{
         }
 
         System.out.printf("The %d(th) value in the Fibonacci sequence is: \n",target);
-        System.out.println(brobIntArr[target-2].toString());
+        System.out.println(brobIntArr[target-1].toString());
     }
 
     public static BrobInt calcValue(int indexArg){
