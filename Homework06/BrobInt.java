@@ -339,7 +339,14 @@ public class BrobInt {
         }
        for(int i = (bArrOne.length-bArrTwo.length-1); i>=0;i--){
            holder += bArrOne[i];
-           strForBrob.insert(0,holder);
+           if(holder < 10){
+                        strForBrob.insert(0,holder);
+                        strForBrob.insert(0,0);
+
+                    }
+                    else{
+                        strForBrob.insert(0,holder);
+                    }
            holder = 0;
        }
 
@@ -426,9 +433,11 @@ public class BrobInt {
        boolean carry = false;
        StringBuilder strForBrob = new StringBuilder();
        int holder;
+       int j = bArrOne.length-1;
+       int iii = 0;
 
        for(int i = bArrTwo.length-1;i>=0;i--){
-           holder = (int)bArrOne[i] - (int)bArrTwo[i];
+           holder = (int)bArrOne[j] - (int)bArrTwo[i];
            if(carry){
                holder-=1;
            }
@@ -439,16 +448,41 @@ public class BrobInt {
                 strForBrob.insert(0,holder);
             }
             else{
-                strForBrob.insert(0,holder);
+                
+                if(holder < 10){
+                        strForBrob.insert(0,holder);
+                        strForBrob.insert(0,0);
+
+                    }
+                    else{
+                        strForBrob.insert(0,holder);
+                    }
                 carry = false;
             }
+            j--;
+            iii=i;
        }
-       for(int i = bArrTwo.length; i<bArrOne.length;i++){
-           strForBrob.insert(0,bArrOne[i]);
+       holder = 0;
+       if(carry){
+           holder-=1;
+        }
+       
+       for(int i = (bArrOne.length-bArrTwo.length-1); i>=0;i--){
+           holder += bArrOne[i];
+           if(holder < 10){
+                        strForBrob.insert(0,holder);
+                        strForBrob.insert(0,0);
+
+                    }
+                    else{
+                        strForBrob.insert(0,holder);
+                    }
+           holder = 0;
        }
 
        return strForBrob.toString();
    }
+   
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to multiply the value of a BrobIntk passed as argument to this BrobInt
@@ -486,14 +520,14 @@ public class BrobInt {
       BrobInt holder = new BrobInt("0");
       BrobInt currOut = new BrobInt("0");
 
-      if(gint.compareTo(TWO) == 0){
+      if(gint.compareTo(ZERO) == 0){
           throw new ArithmeticException("Cannot divide by zero");
       }
       else if(this.compareTo(gint) < 0 ){
           return ZERO;
       }
 
-      for(int i =0; i < gint.toString().substring(1).length(); i++){
+      for(int i =0; i < ((gint.toString().substring(1).length())/2); i++){
           holder = this.multiply(currOut);
           temp = gint.toString().substring(2*i+1,2*(i+1)+1);
           temp = holder.toString().substring(1).concat(temp);
@@ -501,10 +535,10 @@ public class BrobInt {
           currOut = holder.divide(gint);
           if(currOut.compareTo(TEN) < 0){
               brobToReturn = new BrobInt(brobToReturn.toString().concat("0"));
-              brobToReturn = new BrobInt(brobToReturn.toString().concat(currOut.toString().substring(0)));
+              brobToReturn = new BrobInt(brobToReturn.toString().concat(currOut.toString().substring(1)));
           }
           else{
-              brobToReturn = new BrobInt(brobToReturn.toString().concat(currOut.toString().substring(0)));
+              brobToReturn = new BrobInt(brobToReturn.toString().concat(currOut.toString().substring(1)));
           }
       }
 
@@ -534,20 +568,21 @@ public class BrobInt {
    *        THAT was easy.....
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public int compareTo( BrobInt gint ) {
-      if(this.toString().length() > gint.toString().length()){
-          return 1;
-      }
-      else if(this.toString().length() < gint.toString().length()){
-          return -1;
-      }
-      else if(this.toString().charAt(0)== '-' && gint.toString().charAt(0) == '-'){
-          return (this.toString().compareTo( gint.toString() ));
+      
+      if(this.toString().charAt(0)== '-' && gint.toString().charAt(0) == '-'){
+          return (-1*(this.toString().compareTo( gint.toString() )));
       }
       else if(this.toString().charAt(0)== '-' && gint.toString().charAt(0) == '+'){
           return -1;
       }
       else if(this.toString().charAt(0)== '+' && gint.toString().charAt(0) == '-'){
           return 1;
+      }
+      else if(this.toString().length() > gint.toString().length()){
+          return 1;
+      }
+      else if(this.toString().length() < gint.toString().length()){
+          return -1;
       }
       else{
           return (this.toString().compareTo( gint.toString() ));
@@ -613,45 +648,24 @@ public class BrobInt {
       }
 
       for( int i = 0; i < byteVersion.length; i++ ) {
-          strToReturn.append(byteVersion[i]);
+          if(byteVersion[i] < 10){
+              strToReturn.append(0);
+              strToReturn.append(byteVersion[i]);
+            }
+            else{
+                strToReturn.append(byteVersion[i]);
+            }
+          
+          
+          
       }
 
       return strToReturn.toString();
    }
 
-   private byte[] trimByteArr(byte[] byteArg){
-       int locat = 0;
+  
 
-       for(int i = byteArg.length - 1; i >= 0;i--){
-           if(byteArg[i]!=0){
-               locat = i;
-               break;
-           }
-       }
-
-       byte[] byteOut = new byte[byteArg.length-locat];
-
-       for(int i = 0; i < byteOut.length;i++ ){
-           byteOut[i] = byteArg[i+locat];
-       }
-
-       return byteOut;
-   }
-
-   private String trimStr(String strArg){
-       byte[] byStr = this.strToByte(strArg);
-
-       byStr = this.trimByteArr(byStr);
-
-       StringBuilder strOut = new StringBuilder();
-
-       for(int i = 0; i < byStr.length; i++){
-           strOut.append(byStr[i]);
-       }
-
-       return byStr.toString();
-   }
-
+   
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to display an Array representation of this BrobInt as its bytes
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
