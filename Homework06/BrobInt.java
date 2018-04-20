@@ -59,6 +59,12 @@ public class BrobInt {
    *  @param  value  String value to make into a BrobInt
    */
    public BrobInt( String valueArg ) {
+      if(valueArg.length() == 0){
+          System.out.println("Enter an argument");
+          System.exit(2);
+        }
+       
+       
       try{
           validateDigits(valueArg);
       }
@@ -202,6 +208,17 @@ public class BrobInt {
        return byteArrToReturn;
    }
 
+   public BrobInt add(BrobInt gint){
+    return this.addByte(gint);
+    }
+    
+    public BrobInt subtract(BrobInt gint){
+     return this.subtractByte(gint);   
+    }
+   
+   
+   
+   
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to add the value of a BrobIntk passed as argument to this BrobInt using byte array
    *  @param  gint         BrobInt to add to this
@@ -210,7 +227,7 @@ public class BrobInt {
    public BrobInt addByte( BrobInt gint ) {
        String strForBrob = new String("");
        boolean finalPositive = true;
-
+       
        if(this.compareTo(gint) >= 0){ //this>arg
            if(isPositive && gint.getPositive()){
                strForBrob = addHelper(byteVersion,gint.getByteArr());
@@ -266,29 +283,64 @@ public class BrobInt {
    public String addHelper(byte[] bArrOne, byte[] bArrTwo){
        boolean carry = false;
        StringBuilder strForBrob = new StringBuilder();
-       int holder;
+       int holder = 0;
+       int j=bArrOne.length -1;
+       int iii = 0;
 
+
+        
        for(int i = bArrTwo.length -1; i>=0 ;i--){
-           holder = (int)bArrOne[i] + (int)bArrTwo[i];
-           if(carry){
-               holder+=1;
-           }
-
-            if(holder>=100){
-                carry = true;
-                holder-=100;
-                strForBrob.insert(0,holder);
-            }
-            else{
-                strForBrob.insert(0,holder);
-                carry = false;
-            }
+           
+             
+               holder = (int)bArrOne[j] + (int)bArrTwo[i];
+            
+               if(carry){
+                   holder+=1;
+               }
+    
+                if(holder>=100){
+                    carry = true;
+                    holder-=100;
+                    if(holder < 10){
+                        strForBrob.insert(0,holder);
+                        strForBrob.insert(0,0);
+                        
+                    }
+                    else{
+                        strForBrob.insert(0,holder);
+                    }
+                    
+                }
+                else{
+                    if(holder < 10){
+                        strForBrob.insert(0,holder);
+                        strForBrob.insert(0,0);
+                        
+                    }
+                    else{
+                        strForBrob.insert(0,holder);
+                    }
+                    
+                    
+                    carry = false;
+                }
+            j--;
+            iii=i;
        }
+       holder = 0;
        if(carry){
-           strForBrob.insert(0,1);
+           holder+=1;
+           if((bArrOne.length-bArrTwo.length-1) < 0){
+                
+                        
+                        strForBrob.insert(0,1);
+                
+            }
         }
-       for(int i = bArrTwo.length; i<bArrOne.length;i++){
-           strForBrob.insert(0,bArrOne[i]);
+       for(int i = (bArrOne.length-bArrTwo.length-1); i>=0;i--){
+           holder += bArrOne[i];
+           strForBrob.insert(0,holder);
+           holder = 0;
        }
 
        return strForBrob.toString();
