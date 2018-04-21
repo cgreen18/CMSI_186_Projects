@@ -208,15 +208,24 @@ public class BrobInt {
        return byteArrToReturn;
    }
 
+   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    *  Method to add the value of a BrobIntk passed as argument to this BrobInt using byte array
+    *  @param  gint         BrobInt to add to this
+    *  @return BrobInt that is the sum of the value of this BrobInt and the one passed in
+    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt add(BrobInt gint){
     return this.addByte(gint);
     }
 
+
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Method to subtract the value of a BrobIntk passed as argument to this BrobInt using byte array
+     *  @param  gint         BrobInt to add to this
+     *  @return BrobInt that is the sum of the value of this BrobInt and the one passed in
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     public BrobInt subtract(BrobInt gint){
      return this.subtractByte(gint);
     }
-
-
 
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -280,6 +289,13 @@ public class BrobInt {
 
    }
 
+
+   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    *  Method to add the value of a BrobIntk passed as argument to this BrobInt using byte array
+    *  @param  bArrOne and bArrTwo        the two byte[] to add together
+    *  @param bArrTwo
+    *  @return String that is the sum of the byte arrays
+    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public String addHelper(byte[] bArrOne, byte[] bArrTwo){
        boolean carry = false;
        StringBuilder strForBrob = new StringBuilder();
@@ -429,6 +445,13 @@ public class BrobInt {
       return this.subtractByte(gint);
    }
 
+
+   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    *  Method to subtract the value of a BrobIntk passed as argument to this BrobInt using byte array
+    *  @param  bArrOnethe two byte[] to add together
+    *  @param bArrTwo
+    *  @return String that is the difference of the byte arrays
+    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public String subHelper(byte[] bArrOne, byte[] bArrTwo){
        boolean carry = false;
        StringBuilder strForBrob = new StringBuilder();
