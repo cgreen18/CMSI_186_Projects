@@ -14,6 +14,7 @@
  *  -----  ----------  ------------  ---------------------------------------------------------------------
  *  1.0.0  04-25-18    Conor Green  Initial writing and begin coding
  *  1.1.0  04-27-18    Conor Green  Revision.  Uploaded 1.0.0 to github
+ *  1.2.0  05-01-18    Conor Green  Made makeChangeWithDynamicProgramming static.  Uploaded this version to github
  *
  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -31,14 +32,20 @@ import java.util.*;
 
 public class DynamicChangeMaker{
 
-    private int[] denoms;
+    private int[] classDenoms;
     private int target;
-    private Tuple[][][] ansArr;
+    private Tuple[][] ansArr;
 
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Description
+     *  @param  gint Description
+     *  @return BrobInt description
+     *  @exception  Exception description
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     public DynamicChangeMaker(String argDenom, String argTarg){
 
         try{
-            validateArgs(argDenom,argTarg);
+            validateStringArgs(argDenom,argTarg);
         }
         catch(IllegalArgumentException iae){
             System.out.println("BAD DATA");
@@ -46,14 +53,20 @@ public class DynamicChangeMaker{
         }
 
         //args already validated
-        denoms = strToIntArr(reformArg(argDenom));
+        classDenoms = strToIntArr(reformArg(argDenom));
         target = Integer.parseInt(argTarg);
 
-        ansArr = new Tuple[denoms.length][target+1][4];
+        ansArr = new Tuple[classDenoms.length][target+1];
 
     }
 
-    private void validateArgs(String argDenom,String argTarg) throws IllegalArgumentException{
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Description
+     *  @param  gint Description
+     *  @return BrobInt description
+     *  @exception  Exception description
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    private void validateStringArgs(String argDenom,String argTarg) throws IllegalArgumentException{
         int temp = -1;
         String[] reformDenom;
         int[] argDenomArr;
@@ -99,6 +112,38 @@ public class DynamicChangeMaker{
         }
     }
 
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Description
+     *  @param  gint Description
+     *  @return BrobInt description
+     *  @exception  Exception description
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    private static void validateArgs(int[] argArr,int argTarg) throws IllegalArgumentException{
+        if(argArr.length == 0){
+            throw new IllegalArgumentException("No values found in the denomination array.");
+        }
+        else if(argTarg <= 0){
+            throw new IllegalArgumentException("Enter a positive, non-zero target value.");
+        }
+
+        for(int i = 0; i < argArr.length;i++){
+            if(argArr[i] <= 0){
+                throw new IllegalArgumentException("Enter all positive, non-zero denomination values.");
+            }
+            for(int j = i+1;j<argArr.length;i++){
+                if(argArr[i] == argArr[j]){
+                    throw new IllegalArgumentException("Enter the denominations without duplicates.");
+                }
+            }
+        }
+    }
+
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Description
+     *  @param  gint Description
+     *  @return BrobInt description
+     *  @exception  Exception description
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     private String[] reformArg(String argsIn){
         int i = 0;  //lagging increment
         int j = 0;  //increment
@@ -119,6 +164,12 @@ public class DynamicChangeMaker{
         return strArr;
     }
 
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Description
+     *  @param  gint Description
+     *  @return BrobInt description
+     *  @exception  Exception description
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     private int[] strToIntArr(String[] strArg){
         int[] arrToReturn = new int[strArg.length];
 
@@ -136,14 +187,33 @@ public class DynamicChangeMaker{
         return arrToReturn;
     }
 
-    public void makeChangeWithDynamicProgramming(int[] argArr, int argTarg) throws UnsupportedOperationException{
-        int[] zeroArr = new int[argArr.length];
-        for(int i = 0; i < zeroArr.length;i++){zeroArr[i] = 0;}//creates zero array
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Description
+     *  @param  gint Description
+     *  @return BrobInt description
+     *  @exception  Exception description
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    public static void makeChangeWithDynamicProgramming(int[] argArr, int argTarg){
+        try{
+            validateArgs(argArr,argTarg);
+        }
+        catch(IllegalArgumentException iae){
+            System.out.println("BAD DATA");
+            System.out.println(iae.toString());
+            System.exit(1);
+        }
+
+        int[] denoms = argArr;
+        int target = argTarg;
         int[] temp;
         Tuple tempTuple;
+        Tuple[][] ansArr = new Tuple[denoms.length-1][target];
+
+        int[] zeroArr = new int[argArr.length];
+        for(int i = 0; i < zeroArr.length;i++){zeroArr[i] = 0;}//creates zero array
 
         for(int i = 0; i<denoms.length;i++){
-            updateAnsArr(i,0,3,new Tuple(zeroArr));
+            ansArr[i][0] = new Tuple(zeroArr);
         }
 
         for(int i = 0; i < denoms.length;i++){ //denoms
@@ -151,35 +221,35 @@ public class DynamicChangeMaker{
                 if(j-denoms[i]>=0){
                     temp = copyArr(zeroArr);
                     temp[i] = 1;
-                    updateAnsArr(i,j,0,new Tuple(temp));
+                    ansArr[i][j] = new Tuple(temp);
                 }
                 else{
-                    updateAnsArr(i,j,0,new Tuple(new int[0]));
+                    ansArr[i][j] = Tuple.IMPOSSIBLE;
                 }
 
                 if(j>=denoms[i]){
-                    tempTuple = copyTuple(ansArr[i][j-denoms[i]][3]);
-                    updateAnsArr(i,j,1,tempTuple);
+                    tempTuple = copyTuple(ansArr[i][j-denoms[i]]);
+                    ansArr[i][j] = compareTuples(ansArr[i][j],tempTuple);
                 }
 
                 if(i>0){
-                    tempTuple = copyTuple(ansArr[i-1][j][3]);
-                    updateAnsArr(i,j,2,tempTuple);
+                    tempTuple = copyTuple(ansArr[i-1][j]);
+                    ansArr[i][j] = compareTuples(ansArr[i][j],tempTuple);
                 }
-
-                tempTuple = ansArr[i][j][0].add(ansArr[i][j][1]);
-                updateAnsArr(i,j,3,tempTuple);
-                tempTuple = compareTuples(tempTuple,ansArr[i][j][2]);
-                updateAnsArr(i,j,3,tempTuple);
-
             }
         }
 
-        tempTuple = ansArr[denoms.length-1][argTarg][3];
+        tempTuple = ansArr[denoms.length-1][argTarg];
         System.out.println(tempTuple.toString());
     }
 
-    private Tuple compareTuples(Tuple firstTuple,Tuple secondTuple){
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Description
+     *  @param  gint Description
+     *  @return BrobInt description
+     *  @exception  Exception description
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    private static Tuple compareTuples(Tuple firstTuple,Tuple secondTuple){
         if(firstTuple.isImpossible() && secondTuple.isImpossible()){
             return new Tuple(new int[0]);
         }
@@ -204,11 +274,13 @@ public class DynamicChangeMaker{
         //return new Tuple(new int[0]);
     }
 
-    private void updateAnsArr(int row, int col, int depth, Tuple argTup){
-        ansArr[row][col][depth] = argTup;
-    }
-
-    private Tuple copyTuple(Tuple argTuple){
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Description
+     *  @param  gint Description
+     *  @return BrobInt description
+     *  @exception  Exception description
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    private static Tuple copyTuple(Tuple argTuple){
         Tuple tupleToReturn = new Tuple(argTuple.length());
 
         for(int i = 0; i < tupleToReturn.length();i++){
@@ -218,7 +290,13 @@ public class DynamicChangeMaker{
         return tupleToReturn;
     }
 
-    private int[] copyArr(int[] argArr){
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Description
+     *  @param  gint Description
+     *  @return BrobInt description
+     *  @exception  Exception description
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    private static int[] copyArr(int[] argArr){
         int[] arrToReturn = new int[argArr.length];
 
         for(int i = 0; i <arrToReturn.length;i++){
@@ -228,14 +306,32 @@ public class DynamicChangeMaker{
         return arrToReturn;
     }
 
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Description
+     *  @param  gint Description
+     *  @return BrobInt description
+     *  @exception  Exception description
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     private int[] getDenomsArr(){
-        return denoms;
+        return classDenoms;
     }
 
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Description
+     *  @param  gint Description
+     *  @return BrobInt description
+     *  @exception  Exception description
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     private int getTarget(){
         return target;
     }
 
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Description
+     *  @param  gint Description
+     *  @return BrobInt description
+     *  @exception  Exception description
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     public static void main(String[] args){  //args[0] is of form "3,5,7,8" = denominations
     //args[1] in form "34" = target
         if(args.length !=2){
