@@ -96,13 +96,16 @@ public class DynamicChangeMaker{
         if(argArr.length == 0){
             throw new IllegalArgumentException("No values found in the denomination array.");
         }
+        else if(String.valueOf(argTarg).length()==0){
+                throw new IllegalArgumentException("Enter a positive, non-zero target value.");
+        }
         else if(argTarg <= 0){
             throw new IllegalArgumentException("Enter a positive, non-zero target value.");
         }
 
         for(int i = 0; i < argArr.length;i++){
-            if(argArr[i] <= 0){
-                throw new IllegalArgumentException("Enter all positive, non-zero denomination values.");
+            if(argArr[i] <= 1){
+                throw new IllegalArgumentException("Enter all positive, denomination values greater than one.");
             }
             for(int j = i+1;j<argArr.length;j++){
                 if(argArr[i] == argArr[j]){
@@ -174,7 +177,7 @@ public class DynamicChangeMaker{
         catch(IllegalArgumentException iae){
             System.out.println("BAD DATA");
             System.out.println(iae.toString());
-            System.out.println("\n IMPORTANT MESSAGE: ");
+            System.out.println("\n------------ IMPORTANT MESSAGE --------------");
             System.out.println("Usually I would System.exit() here but the test harness needs to keep running.\n");
             //System.exit(1);  //exit() removed so DynamicChangemakerTestHarness can keep testing
         }
