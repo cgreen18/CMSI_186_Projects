@@ -212,13 +212,13 @@ public class DynamicChangeMaker{
                 }
 
                 if((j-denoms[i])>=0){
-                    tempTuple = copyTuple(ansArr[i][j-denoms[i]]);
-                    ansArr[i][j] = addTuples(ansArr[i][j],tempTuple);
+                    //tempTuple = copyTuple(ansArr[i][j-denoms[i]]);
+                    ansArr[i][j] = addTuples(ansArr[i][j],ansArr[i][j-denoms[i]]);
                 }
 
                 if(i>0){
-                    tempTuple = copyTuple(ansArr[i-1][j]);
-                    ansArr[i][j] = compareTuples(ansArr[i][j],tempTuple);
+                    //tempTuple = copyTuple(ansArr[i-1][j]);
+                    ansArr[i][j] = compareTuples(ansArr[i][j],ansArr[i-1][j]);
                 }
             }
         }
@@ -280,20 +280,20 @@ public class DynamicChangeMaker{
         }
     }
 
-    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *  Method to copy a Tuple to get around messing with the original Tuple due to addressing
-     *  @param  argTuple- the Tuple argument to be copied
-     *  @return Tuple  returns a NEW Tuple that is equivalent to the original
-     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    private static Tuple copyTuple(Tuple argTuple){
-        Tuple tupleToReturn = new Tuple(argTuple.length());
-
-        for(int i = 0; i < tupleToReturn.length();i++){
-            tupleToReturn.setElement(i,argTuple.getElement(i));
-        }
-
-        return tupleToReturn;
-    }
+    // /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //  *  Method to copy a Tuple to get around messing with the original Tuple due to addressing
+    //  *  @param  argTuple- the Tuple argument to be copied
+    //  *  @return Tuple  returns a NEW Tuple that is equivalent to the original
+    //  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    // private static Tuple copyTuple(Tuple argTuple){
+    //     Tuple tupleToReturn = new Tuple(argTuple.length());
+    //
+    //     for(int i = 0; i < tupleToReturn.length();i++){
+    //         tupleToReturn.setElement(i,argTuple.getElement(i));
+    //     }
+    //
+    //     return tupleToReturn;
+    // }
 
     /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Method to copy an array without messing with the original.  Avoids that addressing error
@@ -332,9 +332,10 @@ public class DynamicChangeMaker{
         }
 
         int[] denominations=strToIntArr(reformArg(args[0]));
+        System.out.println("denoms");
         int targetValue = Integer.parseInt(args[1]);
-
-        makeChangeWithDynamicProgramming(denominations,targetValue);
+        System.out.println("target");
+        DynamicChangeMaker.makeChangeWithDynamicProgramming(denominations,targetValue);
 
     }
 
