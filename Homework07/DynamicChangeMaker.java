@@ -16,6 +16,7 @@
  *  1.1.0  04-27-18    Conor Green  Revision.  Uploaded 1.0.0 to github
  *  1.2.0  05-01-18    Conor Green  Made makeChangeWithDynamicProgramming static.  Uploaded this version to github
  *  1.3.0  05-01-18    Conor Green  Nearly final version
+ *  1.3.5  05-01-18    Conor Green  Final version!
  *
  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -173,7 +174,9 @@ public class DynamicChangeMaker{
         catch(IllegalArgumentException iae){
             System.out.println("BAD DATA");
             System.out.println(iae.toString());
-            System.exit(1);
+            System.out.println("\n IMPORTANT MESSAGE: ");
+            System.out.println("Usually I would System.exit() here but the test harness needs to keep running.\n");
+            //System.exit(1);  //exit() removed so DynamicChangemakerTestHarness can keep testing
         }
 
         int[] denoms = argArr;
