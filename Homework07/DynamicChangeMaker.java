@@ -70,7 +70,7 @@ public class DynamicChangeMaker{
                 System.exit(1);
             }
 
-            if(temp <= 1){
+            if(temp <= 0){
                 throw new IllegalArgumentException("Each denomination must be greater than 1.\n");
             }
         }
@@ -104,7 +104,7 @@ public class DynamicChangeMaker{
         }
 
         for(int i = 0; i < argArr.length;i++){
-            if(argArr[i] <= 1){
+            if(argArr[i] <= 0){
                 throw new IllegalArgumentException("Enter all positive, denomination values greater than one.");
             }
             for(int j = i+1;j<argArr.length;j++){
@@ -127,7 +127,7 @@ public class DynamicChangeMaker{
         ArrayList templist = new ArrayList(0);
 
         while(argsIn.indexOf(',',j+1) >= 0){   //indexof= -1 iff it no more commas to find
-            j = argsIn.indexOf(',',j);
+            j = argsIn.indexOf(',',j+1);
             templist.add(argsIn.substring(i,j));
             i = j;
         }
@@ -179,6 +179,7 @@ public class DynamicChangeMaker{
             System.out.println(iae.toString());
             System.out.println("\n------------ IMPORTANT MESSAGE --------------");
             System.out.println("Usually I would System.exit() here but the test harness needs to keep running.\n");
+            return Tuple.IMPOSSIBLE;
             //System.exit(1);  //exit() removed so DynamicChangemakerTestHarness can keep testing
         }
 
@@ -195,13 +196,7 @@ public class DynamicChangeMaker{
             ansArr[i][0] = new Tuple(zeroArr);
         }
 
-        /*            (j)target
-        *           _________
-        *          |____|____|
-        *(i)denoms |____|____|
-        *          |____|____|
-        *          |____|____|
-        */
+
 
         for(int i = 0; i < denoms.length;i++){ //denoms-rows
             for(int j = 1; j <= target;j++){ //target-columns
@@ -215,19 +210,19 @@ public class DynamicChangeMaker{
                 }
 
                 if((j-denoms[i])>=0){
-                    //tempTuple = copyTuple(ansArr[i][j-denoms[i]]);
+
                     ansArr[i][j] = addTuples(ansArr[i][j],ansArr[i][j-denoms[i]]);
                 }
 
                 if(i>0){
-                    //tempTuple = copyTuple(ansArr[i-1][j]);
+
                     ansArr[i][j] = compareTuples(ansArr[i][j],ansArr[i-1][j]);
                 }
             }
         }
 
         tempTuple = ansArr[denoms.length-1][argTarg];
-        System.out.println(tempTuple.toString());
+        //System.out.println(tempTuple.toString());
         if(tempTuple.length()==0){
             return Tuple.IMPOSSIBLE;
         }
@@ -283,21 +278,6 @@ public class DynamicChangeMaker{
         }
     }
 
-    // /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //  *  Method to copy a Tuple to get around messing with the original Tuple due to addressing
-    //  *  @param  argTuple- the Tuple argument to be copied
-    //  *  @return Tuple  returns a NEW Tuple that is equivalent to the original
-    //  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    // private static Tuple copyTuple(Tuple argTuple){
-    //     Tuple tupleToReturn = new Tuple(argTuple.length());
-    //
-    //     for(int i = 0; i < tupleToReturn.length();i++){
-    //         tupleToReturn.setElement(i,argTuple.getElement(i));
-    //     }
-    //
-    //     return tupleToReturn;
-    // }
-
     /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *  Method to copy an array without messing with the original.  Avoids that addressing error
      *  @param  argArr- int array argument to be copied
@@ -326,6 +306,9 @@ public class DynamicChangeMaker{
             System.exit(2);
         }
 
+        System.out.println(args[0]);
+        System.out.println(args[1]);
+
         try{
             validateStringArgs(args[0],args[1]);
         }
@@ -334,11 +317,13 @@ public class DynamicChangeMaker{
             System.out.println(iae.toString());
         }
 
+        System.out.println("stuck");
+
         int[] denominations=strToIntArr(reformArg(args[0]));
-        System.out.println("denoms");
+        //System.out.println("denoms");
         int targetValue = Integer.parseInt(args[1]);
-        System.out.println("target");
-        DynamicChangeMaker.makeChangeWithDynamicProgramming(denominations,targetValue);
+        //System.out.println("target");
+        System.out.println(DynamicChangeMaker.makeChangeWithDynamicProgramming(denominations,targetValue).toString());
 
     }
 
