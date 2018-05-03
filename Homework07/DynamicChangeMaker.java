@@ -127,11 +127,11 @@ public class DynamicChangeMaker{
         ArrayList templist = new ArrayList(0);
 
         while(argsIn.indexOf(',',j+1) >= 0){   //indexof= -1 iff it no more commas to find
-            j = argsIn.indexOf(',',j);
-            templist.add(argsIn.substring(i,j));
+            j =1+ argsIn.indexOf(',',j);
+            templist.add(argsIn.substring(i,j-1));
             i = j;
         }
-        templist.add(argsIn.substring(j+1));
+        templist.add(argsIn.substring(j));
 
         String[] strArr = new String[templist.size()];
         for(int w = 0; w < strArr.length;w++){
@@ -298,8 +298,7 @@ public class DynamicChangeMaker{
      * makeChangeWithDynamicProgramming() method w/ validated and reformed arguemnts
      *  @param  args-  a String array given by the command line
      *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    public static void main(String[] args){  //args[0] is of form "3,5,7,8" = denominations
-    //args[1] in form "34" = target
+    public static void main(String[] args){  
         if(args.length !=2){
             System.out.println("BAD DATA");
             System.out.println("You must enter two parameters for denominations and target");
@@ -317,12 +316,12 @@ public class DynamicChangeMaker{
             System.out.println(iae.toString());
         }
 
-        System.out.println("stuck");
+
 
         int[] denominations=strToIntArr(reformArg(args[0]));
-        //System.out.println("denoms");
+
         int targetValue = Integer.parseInt(args[1]);
-        //System.out.println("target");
+
         System.out.println(DynamicChangeMaker.makeChangeWithDynamicProgramming(denominations,targetValue).toString());
 
     }
