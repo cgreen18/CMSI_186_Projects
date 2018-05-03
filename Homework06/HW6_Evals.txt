@@ -30,7 +30,7 @@ BrobInt remainder [of 2, 1 pt. EC]  : 0 point
 Fib class file exists               : 1 point
 Fib constructor                     : 1 point
 Fib input error handling            : 1 point
-Fib output correct number [of 4]    : 1 points
+Fib output correct number [of 4]    : 4 points
 
 Minimum three files in repo (3)     : 3 points
 All files compile (3)               : 3 points
@@ -42,7 +42,8 @@ Total possible score: 40 points
 
 Evaluation
 ==========
-   34 out of 40 = 85.00% which is a B
+   39 out of 40 = 97.50% which is an A-plus
+
 
 Watch your coding style -- your indenting is not consistent.
 Your Fibonacci program got incorrect values.
