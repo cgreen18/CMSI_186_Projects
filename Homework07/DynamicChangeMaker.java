@@ -127,7 +127,7 @@ public class DynamicChangeMaker{
         ArrayList templist = new ArrayList(0);
 
         while(argsIn.indexOf(',',j+1) >= 0){   //indexof= -1 iff it no more commas to find
-            j = argsIn.indexOf(',',j+1);
+            j = argsIn.indexOf(',',j);
             templist.add(argsIn.substring(i,j));
             i = j;
         }
