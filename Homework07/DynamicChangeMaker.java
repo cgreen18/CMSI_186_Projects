@@ -196,8 +196,6 @@ public class DynamicChangeMaker{
             ansArr[i][0] = new Tuple(zeroArr);
         }
 
-
-
         for(int i = 0; i < denoms.length;i++){ //denoms-rows
             for(int j = 1; j <= target;j++){ //target-columns
                 if((j-denoms[i])>=0){
@@ -222,7 +220,6 @@ public class DynamicChangeMaker{
         }
 
         tempTuple = ansArr[denoms.length-1][argTarg];
-        //System.out.println(tempTuple.toString());
         if(tempTuple.length()==0){
             return Tuple.IMPOSSIBLE;
         }
