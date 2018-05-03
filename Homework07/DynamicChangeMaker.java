@@ -298,15 +298,12 @@ public class DynamicChangeMaker{
      * makeChangeWithDynamicProgramming() method w/ validated and reformed arguemnts
      *  @param  args-  a String array given by the command line
      *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    public static void main(String[] args){  
+    public static void main(String[] args){
         if(args.length !=2){
             System.out.println("BAD DATA");
             System.out.println("You must enter two parameters for denominations and target");
             System.exit(2);
         }
-
-        System.out.println(args[0]);
-        System.out.println(args[1]);
 
         try{
             validateStringArgs(args[0],args[1]);
